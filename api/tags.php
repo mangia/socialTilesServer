@@ -1,8 +1,8 @@
 <?php 
 class Tags {
-	public final static $newUser = 0;
-	public final static $newGroup = 1;
-	public final static $newEvent = 2;
+	public static $newUser = 0;
+	public static $newGroup = 1;
+	public static $newEvent = 2;
 }
 
 ?>
