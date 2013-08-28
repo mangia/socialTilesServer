@@ -24,7 +24,7 @@
 oid desc limit 1; */
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			
-			$user_array[$row['fbid']]     = $row['fbid'];
+			$user_array['fbid']            = $row['fbid'];
 			$user_array['name_first']      = $row['name_first'];
 			$user_array['name_last']       = $row['name_last'];
 			$user_array['total_score']     = $row['total_score'];
