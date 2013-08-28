@@ -52,7 +52,7 @@ oid desc limit 1; */
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
 		
-		$row = $result->fetch(PDO::FETCH_ASSOC));
+		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
 		$query ="INSERT INTO users(name_first, name_last, fbid, entity)	SELECT".
