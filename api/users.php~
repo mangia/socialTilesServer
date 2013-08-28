@@ -56,9 +56,9 @@ oid desc limit 1; */
 		$entity_id = $row['id'];	
 		
 		$query ="INSERT INTO users(name_first, name_last, fbid, entity)	SELECT".
-		" '".$fbid."'".
-		" '".$name_first."'".
-		" '".$name_last."'".
+		" '".$fbid."',".
+		" '".$name_first.",'".
+		" '".$name_last."',".
 		" ".$entity_id." WHERE NOT exists( SELECT * FROM users where fbid = '".$fbid."');";
 		
 		echo "querry is: ".$query;
