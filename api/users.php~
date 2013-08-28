@@ -1,6 +1,6 @@
 <?php
 	require 'Slim/Slim.php';
-	require 'tags.php'
+	require 'tags.php';
 	
 	\Slim\Slim::registerAutoloader();
 
