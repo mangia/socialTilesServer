@@ -47,7 +47,7 @@ oid desc limit 1; */
 
 		
 		
-		$query = "INSERT INTO entities(type) SELECT ".Tags::newUser.";";
+		$query = "INSERT INTO entities(type) SELECT ".Tags::$newUser.";";
 		$result = $db->query($query);
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
