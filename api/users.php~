@@ -51,7 +51,7 @@ oid desc limit 1; */
 		$result = $db->query($query);
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
-		
+		$result = $db->query($query);
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		

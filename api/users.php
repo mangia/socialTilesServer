@@ -52,12 +52,13 @@ oid desc limit 1; */
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
 		$result = $db->query($query);
+		
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
 		$query ="INSERT INTO users(name_first, name_last, fbid, entity)	SELECT".
 		" '".$fbid."',".
-		" '".$name_first.",'".
+		" '".$name_first."',".
 		" '".$name_last."',".
 		" ".$entity_id." WHERE NOT exists( SELECT * FROM users where fbid = '".$fbid."');";
 		
