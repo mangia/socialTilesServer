@@ -1,15 +1,10 @@
 <?php
 	require 'Slim/Slim.php';
-	//require 'vendor/autoload.php';
 	require 'tags.php';
-	//require 'JsonApiMiddleware.php';
-	//require 'JsonApiView.php';
 	
 	\Slim\Slim::registerAutoloader();
 
 	$app = new \Slim\Slim();
-	//$app->view(new \JsonApiView());
-   //$app->add(new \JsonApiMiddleware());	
 	
 	
 	$dsn = "pgsql:"
@@ -24,27 +19,10 @@
 	if($app->request()->isGet()){
 		$fbid =$app->request()->get('fbid');
 		$query = "SELECT *  FROM users u WHERE u.fbid='".$fbid."'";
-		$result = $db->query($query);
-		$user_array = array();
-		/* select your_fields from your_table where your_condition order by 
-oid desc limit 1; */
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$user_array['user_id']         = $row['user_id'];
-			$user_array['fbid']            = $row['fbid'];
-			$user_array['name_first']      = $row['name_first'];
-			$user_array['name_last']       = $row['name_last'];
-			$user_array['total_score']     = $row['total_score'];
-			$user_array['total_duration']  = $row['total_duration'];
-			$user_array['num_achievments'] = $row['num_achievments'];
-			$user_array['entity']          = $row['entity'];
-		}
+		$result = $db->query($query);		
+		$row = $result->fetch(PDO::FETCH_ASSOC);
+		echo json_encode($row);
 		
-		$res = $app->response();
-		
-		$res['Content-Type'] = 'application/json';
-		$res['X-Powered-By'] = 'Slim';
-		
-		echo json_encode($user_array);
 	}
 	if($app->request()->isPost()){
 		
@@ -92,17 +70,7 @@ oid desc limit 1; */
 				
 		echo json_encode($row);
 		
-		//$app->render(200,$user_array )	;	
 		
-		/*$res = $app->response();
-		
-		$res['Content-Type'] = 'application/json';
-		$res['X-Powered-By'] = 'Slim';
-		
-		//$app->response->headers->set('Content-Type', 'application/json');		
-		$res->body(json_encode($user_array));
-		//echo json_encode($user_array);
-		*/
 			
 		
 	}
