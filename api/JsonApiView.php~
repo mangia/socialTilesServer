@@ -29,9 +29,9 @@ class JsonApiView extends \Slim\View {
         $status = intval($status);
 
         //append error bool
-        if (!$this->has('error')) {
+       //if (!$this->has('error')) {
             $this->set('error', false);
-        }
+        //}
 
         //append status code
         $this->set('status', $status);
