@@ -1,3 +1,5 @@
+//select your_fields from your_table where your_condition order by oid desc limit 1; 
+
 <?php
 	require 'Slim/Slim.php';
 	require 'tags.php';
@@ -52,10 +54,18 @@
 		
 		$query = "SELECT *  FROM users u WHERE u.fbid='".$fbid."'";
 		$result = $db->query($query);
-		$user_array = array();
-		/* select your_fields from your_table where your_condition order by 
-oid desc limit 1; */
-		/*while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+	
+		
+		$row = $result->fetch(PDO::FETCH_ASSOC);
+				
+		echo json_encode($row);		
+	}
+?>
+
+
+	/*$user_array = array();
+		 
+		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			$user_array['user_id']         = $row['user_id'];
 			$user_array['fbid']            = $row['fbid'];
 			$user_array['name_first']      = $row['name_first'];
@@ -65,13 +75,3 @@ oid desc limit 1; */
 			$user_array['num_achievments'] = $row['num_achievments'];
 			$user_array['entity']          = $row['entity'];
 		}*/
-		
-		$row = $result->fetch(PDO::FETCH_ASSOC);
-				
-		echo json_encode($row);
-		
-		
-			
-		
-	}
-?>
