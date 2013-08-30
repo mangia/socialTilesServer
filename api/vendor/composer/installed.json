@@ -1,0 +1,95 @@
+[
+    {
+        "name": "entomb/slim-json-api",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/entomb/slim-json-api.git",
+            "reference": "eb5eb016dc433d7fdbaa6d397edde6ab483c4cad"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/entomb/slim-json-api/zipball/eb5eb016dc433d7fdbaa6d397edde6ab483c4cad",
+            "reference": "eb5eb016dc433d7fdbaa6d397edde6ab483c4cad",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2013-08-29 13:43:23",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "jsonAPI/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL 3.0"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Tavares",
+                "email": "the.entomb@gmail.com",
+                "homepage": "https://github.com/entomb",
+                "role": "Developer"
+            }
+        ],
+        "description": "Slim extension to implement fast JSON API's",
+        "homepage": "https://github.com/entomb/slim-json-api",
+        "keywords": [
+            "api",
+            "json",
+            "middleware",
+            "slim",
+            "view"
+        ]
+    },
+    {
+        "name": "slim/slim",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/codeguy/Slim.git",
+            "reference": "b8181de1112a1e2f565b40158b621c34ded38053"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/codeguy/Slim/zipball/b8181de1112a1e2f565b40158b621c34ded38053",
+            "reference": "b8181de1112a1e2f565b40158b621c34ded38053",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2012-12-13 02:15:50",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Slim": "."
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Josh Lockhart",
+                "email": "info@joshlockhart.com",
+                "homepage": "http://www.joshlockhart.com/"
+            }
+        ],
+        "description": "Slim Framework, a PHP micro framework",
+        "homepage": "http://github.com/codeguy/Slim",
+        "keywords": [
+            "microframework",
+            "rest",
+            "router"
+        ]
+    }
+]

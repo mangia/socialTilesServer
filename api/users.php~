@@ -88,7 +88,7 @@ oid desc limit 1; */
 		$res['X-Powered-By'] = 'Slim';
 		
 		//$app->response->headers->set('Content-Type', 'application/json');		
-		$res->setBody(json_encode($user_array));
+		$res->body(json_encode($user_array));
 		//echo json_encode($user_array);
 		
 			
