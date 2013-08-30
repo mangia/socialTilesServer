@@ -1,11 +1,15 @@
 <?php
-	require 'Slim/Slim.php';
+	//require 'Slim/Slim.php';
+	require 'vendor/autoload.php';
 	require 'tags.php';
 	
 	\Slim\Slim::registerAutoloader();
 
 	$app = new \Slim\Slim();
-
+	$app->view(new \JsonApiView());
+   $app->add(new \JsonApiMiddleware());	
+	
+	
 	$dsn = "pgsql:"
 			. "host=ec2-54-227-238-31.compute-1.amazonaws.com;"
     		. "dbname=d3r468400g680j;"
@@ -82,7 +86,11 @@ oid desc limit 1; */
 			$user_array['entity']          = $row['entity'];
 		}
 		
-		$res = $app->response();
+				
+		
+		$app->render(200,$user_array )	;	
+		
+		/*$res = $app->response();
 		
 		$res['Content-Type'] = 'application/json';
 		$res['X-Powered-By'] = 'Slim';
@@ -90,7 +98,7 @@ oid desc limit 1; */
 		//$app->response->headers->set('Content-Type', 'application/json');		
 		$res->body(json_encode($user_array));
 		//echo json_encode($user_array);
-		
+		*/
 			
 		
 	}
