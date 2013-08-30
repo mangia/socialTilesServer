@@ -23,13 +23,15 @@
 		/* select your_fields from your_table where your_condition order by 
 oid desc limit 1; */
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$user_array['group_id']           = $row['group_id'];
-			$user_array['creator']            = $row['creator'];
-			$user_array['name']               = $row['name'];
-			$user_array['description']        = $row['description'];
-			$user_array['date_created']       = $row['date_created'];
-			$user_array['total_duration']     = $row['total_duration'];
-			$user_array['entity']             = $row['entity'];
+			$user_array['event_id']             = $row['event_id'];
+			$user_array['name']                 = $row['name'];
+			$user_array['creator']              = $row['creator'];
+			$user_array['type_of_participants'] = $row['type_of_participants'];
+			$user_array['date_created']         = $row['date_created'];
+			$user_array['start_date']           = $row['start_date'];
+			$user_array['end_date']             = $row['end_date'];
+			$user_array['reward_text']          = $row['reward_text'];
+			$user_array['entity']               = $row['entity'];
 		}
 		
 		$res = $app->response();
@@ -41,14 +43,17 @@ oid desc limit 1; */
 	}
 	if($app->request()->isPost()){
 		
-		$creator =  $app->request()->post('creator');
-		$name = $app->request()->post('name');
-		$description = $app->request()->post('description');
-		$date = $app->request()->post('date_created');
-
+		$creator                  = $app->request()->post('creator');
+		$name                     = $app->request()->post('name');
+		$type_of_participants   = $app->request()->post('type_of_participants');
+		$date                     = $app->request()->post('date_created');
+		$start_date              = $app->request()->post('start_date');
+		$end_date                = $app->request()->post('end_date');
+		$reward_text            = $app->request()->post('reward_text');
+    
 		
 		
-		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
+		$query = "INSERT INTO entities(type) SELECT ".Tags::$newEvent.";";
 		$result = $db->query($query);
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
@@ -57,11 +62,14 @@ oid desc limit 1; */
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
-		$query ="INSERT INTO users(creator, name, description, date_created, entity)	SELECT".
+		$query ="INSERT INTO users(creator,name,type_of_participants,reward_text,date_created,start_date,end_date, entity)	SELECT".
 		" ".$creator.",".
 		" '".$name."',".
-		" '".$description."',".
+		" ".$type_of_participants.",".
+		" '".$reward_text."',".
 		" '".$date."',".
+		" '".$start_date."',".
+		" '".$end_date."',".
 		" ".$entity_id.";";
 		
 		//echo "querry is: ".$query;

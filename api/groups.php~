@@ -57,7 +57,7 @@ oid desc limit 1; */
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
-		$query ="INSERT INTO users(creator, name, description, date_created, entity)	SELECT".
+		$query ="INSERT INTO users(creator, name, description, date, entity)	SELECT".
 		" ".$creator.",".
 		" '".$name."',".
 		" '".$description."',".

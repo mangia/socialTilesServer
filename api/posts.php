@@ -23,13 +23,11 @@
 		/* select your_fields from your_table where your_condition order by 
 oid desc limit 1; */
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$user_array['group_id']           = $row['group_id'];
+			$user_array['post_id']           = $row['post_id'];
 			$user_array['creator']            = $row['creator'];
-			$user_array['name']               = $row['name'];
-			$user_array['description']        = $row['description'];
-			$user_array['date_created']       = $row['date_created'];
-			$user_array['total_duration']     = $row['total_duration'];
-			$user_array['entity']             = $row['entity'];
+			$user_array['posted_to']               = $row['posted_to'];
+			$user_array['post_date']        = $row['post_date'];
+			$user_array['post_text']       = $row['post_text'];
 		}
 		
 		$res = $app->response();
@@ -42,9 +40,9 @@ oid desc limit 1; */
 	if($app->request()->isPost()){
 		
 		$creator =  $app->request()->post('creator');
-		$name = $app->request()->post('name');
-		$description = $app->request()->post('description');
-		$date = $app->request()->post('date_created');
+		$post_to = $app->request()->post('post_to');
+		$post_text = $app->request()->post('post_text');
+		$post_date = $app->request()->post('post_date');
 
 		
 		
@@ -59,10 +57,9 @@ oid desc limit 1; */
 		
 		$query ="INSERT INTO users(creator, name, description, date_created, entity)	SELECT".
 		" ".$creator.",".
-		" '".$name."',".
-		" '".$description."',".
-		" '".$date."',".
-		" ".$entity_id.";";
+		" ".$post_to.",".
+		" '".$post_text."',".
+		" '".$post_date."';";
 		
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
