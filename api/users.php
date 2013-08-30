@@ -88,7 +88,7 @@ oid desc limit 1; */
 			$user_array['entity']          = $row['entity'];
 		}*/
 		
-		$row = $result->fetch(PDO::FETCH_ASSOC)
+		$row = $result->fetch(PDO::FETCH_ASSOC);
 				
 		echo json_encode($row);
 		
