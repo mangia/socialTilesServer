@@ -82,13 +82,13 @@ oid desc limit 1; */
 			$user_array['entity']          = $row['entity'];
 		}
 		
-		//$res = $app->response();
+		$res = $app->response();
 		
-		//$res['Content-Type'] = 'application/json';
-		//$res['X-Powered-By'] = 'Slim';
+		$res['Content-Type'] = 'application/json';
+		$res['X-Powered-By'] = 'Slim';
 		
-		$app->response->headers->set('Content-Type', 'application/json');		
-		$app->response->setBody(json_encode($user_array));
+		//$app->response->headers->set('Content-Type', 'application/json');		
+		$res->setBody(json_encode($user_array));
 		//echo json_encode($user_array);
 		
 			
