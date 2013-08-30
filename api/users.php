@@ -1,15 +1,15 @@
 <?php
-	//require 'Slim/Slim.php';
-	require 'vendor/autoload.php';
+	require 'Slim/Slim.php';
+	//require 'vendor/autoload.php';
 	require 'tags.php';
 	//require 'JsonApiMiddleware.php';
 	//require 'JsonApiView.php';
 	
-	//\Slim\Slim::registerAutoloader();
+	\Slim\Slim::registerAutoloader();
 
 	$app = new \Slim\Slim();
-	$app->view(new \JsonApiView());
-   $app->add(new \JsonApiMiddleware());	
+	//$app->view(new \JsonApiView());
+   //$app->add(new \JsonApiMiddleware());	
 	
 	
 	$dsn = "pgsql:"
@@ -89,8 +89,8 @@ oid desc limit 1; */
 		}
 		
 				
-		
-		$app->render(200,$user_array )	;	
+		echo json_encode($user_array);
+		//$app->render(200,$user_array )	;	
 		
 		/*$res = $app->response();
 		
