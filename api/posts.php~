@@ -67,7 +67,7 @@
 		$post_date = 	$app->request()->post('post_date');
 
 		
-		$query ="INSERT INTO posts(creator, post_to, post_text, post_date)	SELECT".
+		$query ="INSERT INTO posts(creator, posted_to, post_text, post_date)	SELECT".
 		" ".$creator.",".
 		" ".$post_to.",".
 		" '".$post_text."',".
