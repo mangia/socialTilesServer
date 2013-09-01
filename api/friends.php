@@ -51,7 +51,7 @@
 	
 	}
 	if($app->request()->isPost()){
-		$from_user  	= $app->request()->post(Tags::$from_uer);
+		$from_user	= $app->request()->post(Tags::$from_user);
 		$to_user	= $app->request()->post(Tags::$to_user);	
 	
 		

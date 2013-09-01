@@ -43,16 +43,15 @@
 			else{
 				$flag = false;			
 			}	
-			
-			$query .= " user_id = ".$user_ids[$i]." ";
-							
+			$query .= " user_id = ".$user_ids[$i]." ";			
 		}	
+		$result = $db->query($query);
 		
-		return json_encode($value);
+		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 	
 	}
 	if($app->request()->isPost()){
-		$from_user  	= $app->request()->post(Tags::$from_uer);
+		$from_user	= $app->request()->post(Tags::$from_user);
 		$to_user	= $app->request()->post(Tags::$to_user);	
 	
 		
