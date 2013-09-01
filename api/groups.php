@@ -49,13 +49,13 @@
 		$description = $app->request()->post('description');
 		$creator = $app->request()->post('creator');
 			
-		$allPostVars = $app->request()->post();
-		echo json_encode($allPostVars);		
+		//$allPostVars = $app->request()->post();
+		//echo json_encode($allPostVars);		
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
-		echo "result 1 : ";
-		echo $result;
+		//echo "result 1 : ";
+		//echo $result;
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
 		$result = $db->query($query);
