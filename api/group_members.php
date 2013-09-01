@@ -33,26 +33,15 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 		" ".$group.", ".
 		" ".$user.", 0 );";		
-		
+		$allPostVars = $app->request->post();
+		echo $allPostVars;
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
 		//$row = $result->fetch(PDO::FETCH_ASSOC);
 		echo  $query ;	
 		//echo json_encode($row);		
 	}
-//select your_fields from your_table where your_condition order by oid desc limit 1; 
-/*$user_array = array();
-		 
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$user_array['user_id']         = $row['user_id'];
-			$user_array['fbid']            = $row['fbid'];
-			$user_array['name_first']      = $row['name_first'];
-			$user_array['name_last']       = $row['name_last'];
-			$user_array['total_score']     = $row['total_score'];
-			$user_array['total_duration']  = $row['total_duration'];
-			$user_array['num_achievments'] = $row['num_achievments'];
-			$user_array['entity']          = $row['entity'];
-		}*/
+
 ?>
 
 
