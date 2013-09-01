@@ -74,7 +74,7 @@
 		$row = $result->fetch(PDO::FETCH_ASSOC);				
 		
 		$query = "INSERT INTO group_members(group_id, user_id, status) SELECT".
-		" ".$row['ggroup_idroup_id'].", ".
+		" ".$row['group_id'].", ".
 		" ".$creator.", 1 ;";		
 		echo "querry is: ".$query;
 		
