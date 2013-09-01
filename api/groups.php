@@ -63,8 +63,8 @@
 		" '".$date_created."',".
 		" '".$name."',".
 		" '".$description."',".
-		" ".$creator",".
-		" ".$entity_id."";
+		" ".$creator.",".
+		" ".$entity_id.";";
 		
 		echo "querry is: ".$query;
 		$result = $db->query($query);
