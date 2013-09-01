@@ -52,9 +52,9 @@
 			echo json_encode($query);
 			echo json_encode($row);			
 			
-			$group_info[Tags::$first_name] = $row[$first_name ];
-			$group_info[Tags::$last_name] = $row[$last_name ];
-			$group_info[Tags::$fbid] = $row[$fbid ];
+			$group_info[Tags::$first_name] 	= $row[Tags::$first_name ];
+			$group_info[Tags::$last_name] 	= $row[Tags::$last_name ];
+			$group_info[Tags::$fbid] 			= $row[Tags::$fbid ];
 			echo json_encode($group_info);	
 		}
 		else{
