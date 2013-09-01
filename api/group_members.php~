@@ -24,9 +24,10 @@
 		//echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
 				
 		if($app->request()->get(Tags::$op) == Tags::$user){
-			$query = "SELECT *  FROM users WHERE";			
+			$query = "SELECT *  FROM users WHERE ";			
 			$flag = true;			
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+				echo json_encode($row);
 				if(!$flag){
 					$query .= " OR ";
 				}
@@ -34,7 +35,7 @@
 					$flag = false;			
 				}
 				
-				$query .= "user_id =".$row[Tags::$user_id]."";			
+				$query .= " user_id =".$row[Tags::$user_id]."";			
 			}
 			
 			$query.=";";
