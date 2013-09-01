@@ -49,16 +49,19 @@
 		$description = $app->request()->post('description');
 		$creator = $app->request()->post('creator');
 			
-		//$allPostVars = $app->request()->post();
-		
-		//echo json_encode($allPostVars);		
+		$allPostVars = $app->request()->post();
+		echo json_encode($allPostVars);		
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
+		echo "result 1 : ";
+		echo $result;
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
 		$result = $db->query($query);
-		
+		echo "result 2 : ";
+		echo $result;		
+				
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
@@ -71,6 +74,8 @@
 		
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
+		echo "result 3 : ";
+		echo $result;		
 		
 		$query = "SELECT *  FROM groups ORDER BY group_id desc limit 1 ; "	;
 		$result = $db->query($query);
@@ -80,22 +85,13 @@
 		" ".$row['group_id'].", ".
 		" ".$creator.", 1 );";		
 		//echo "querry is: ".$query;
+		$result = $db->query($query);
+		echo "result 1 : ";
+		echo $result;		
 		
 		echo json_encode($row);		
 	}
-//select your_fields from your_table where your_condition order by oid desc limit 1; 
-/*$user_array = array();
-		 
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$user_array['user_id']         = $row['user_id'];
-			$user_array['fbid']            = $row['fbid'];
-			$user_array['name_first']      = $row['name_first'];
-			$user_array['name_last']       = $row['name_last'];
-			$user_array['total_score']     = $row['total_score'];
-			$user_array['total_duration']  = $row['total_duration'];
-			$user_array['num_achievments'] = $row['num_achievments'];
-			$user_array['entity']          = $row['entity'];
-		}*/
+
 ?>
 
 
