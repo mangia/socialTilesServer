@@ -18,7 +18,7 @@
 	
 	if($app->request()->isGet()){
 		
-		if($app->request()->get(Tags::$op) == 'user_groups'){
+		if($app->request()->get(Tags::$op) == "user_groups"){
 			$user = 	$app->request()->get(Tags::$user_id);		
 			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
 			$result = $db->query($query);
@@ -40,6 +40,7 @@
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}
 		else{
+			echo $app->request()->get(Tags::$op)
 			echo json_encode($app->request()->get());		
 			echo strcmp($app->request()->get(Tags::$op), 'user_groups');
 			echo $app->request()->get(Tags::$op) == 'user_groups' ;

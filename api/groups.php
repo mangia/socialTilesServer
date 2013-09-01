@@ -40,7 +40,7 @@
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}
 		else{
-			echo $app->request()->get(Tags::$op)
+			echo $app->request()->get(Tags::$op);
 			echo json_encode($app->request()->get());		
 			echo strcmp($app->request()->get(Tags::$op), 'user_groups');
 			echo $app->request()->get(Tags::$op) == 'user_groups' ;
