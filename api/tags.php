@@ -7,6 +7,10 @@ class Tags {
 	public static $op        = "option";
 	public static $user_id   = "user_id";
 	public static $group_id  = "group_id";
+	
+	public static $group = "group";
+	public static $user	 = "user";
+	public static $event = "event";
 }
 
 ?>
