@@ -18,6 +18,8 @@ class Tags {
 	public static  $first_name       = "name_first";
 	public static  $last_name        = "name_last";
 	public static  $fbid             = "fbid";
+	public static  $from_user 	= "from_user";
+	public static  $to_user     = "to_user";
 }
 
 ?>
