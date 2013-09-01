@@ -48,6 +48,10 @@
 			$query = "SELECT *  FROM users WHERE  user_id =".$group_info[Tags::$creator]."; "	;			
 			$result = $db->query($query);		
 			$row = $result->fetch(PDO::FETCH_ASSOC);
+			
+			echo json_encode($query);
+			echo json_encode($row);			
+			
 			$group_info[Tags::$first_name] = $row[$first_name ];
 			$group_info[Tags::$last_name] = $row[$last_name ];
 			$group_info[Tags::$fbid] = $row[$fbid ];
