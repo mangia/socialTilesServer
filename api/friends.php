@@ -57,7 +57,7 @@
 		
 		$query = "INSERT INTO friends (from_user, to_user, status) VALUES (".
 		" ".$from_user.", ".
-		" ".$from_user.", 0 );";		
+		" ".$to_user.", 1 );";		
 		//$allPostVars = $app->request()->post();
 		//echo json_encode($allPostVars);
 		$result = $db->query($query);
