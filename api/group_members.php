@@ -35,9 +35,9 @@
 		
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
-		$row = $result->fetch(PDO::FETCH_ASSOC);
+		//$row = $result->fetch(PDO::FETCH_ASSOC);
 				
-		echo json_encode($row);		
+		//echo json_encode($row);		
 	}
 //select your_fields from your_table where your_condition order by oid desc limit 1; 
 /*$user_array = array();
