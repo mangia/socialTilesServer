@@ -18,11 +18,11 @@
 	
 	if($app->request()->isGet()){
 		$group	= $app->request()->get(Tags::$group_id);
-		$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."'";
+		$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."' AND gm.status = 1";
 		echo  $query ;	
 		$result = $db->query($query);		
-		$row = $result->fetch(PDO::FETCH_ASSOC);
-		echo json_encode($row);
+		//$row = $result->fetch(PDO::FETCH_ASSOC);
+		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		
 	}
 	if($app->request()->isPost()){

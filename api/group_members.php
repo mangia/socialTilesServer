@@ -19,9 +19,7 @@
 	if($app->request()->isGet()){
 		$group	= $app->request()->get(Tags::$group_id);
 		$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."' AND gm.status = 1";
-		echo  $query ;	
 		$result = $db->query($query);		
-		//$row = $result->fetch(PDO::FETCH_ASSOC);
 		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		
 	}
@@ -33,13 +31,9 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 		" ".$group.", ".
 		" ".$user.", 0 );";		
-		$allPostVars = $app->request()->post();
-		echo json_encode($allPostVars);
-		//echo "querry is: ".$query;
+		//$allPostVars = $app->request()->post();
+		//echo json_encode($allPostVars);
 		$result = $db->query($query);
-		//$row = $result->fetch(PDO::FETCH_ASSOC);
-		echo  $query ;	
-		//echo json_encode($row);		
 	}
 
 ?>
