@@ -37,7 +37,7 @@
 			$query.=";";
 			$result = $db->query($query);
 			
-			echo json_encode($result);
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}
 		
 		
@@ -47,10 +47,7 @@
 		$name =  $app->request()->post('name');
 		$date_created = $app->request()->post('date_created');
 		$description = $app->request()->post('description');
-		$creator = $app->request()->post('creator');
-			
-		//$allPostVars = $app->request()->post();
-		//echo json_encode($allPostVars);		
+		$creator = $app->request()->post('creator');	
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
@@ -70,10 +67,9 @@
 		" ".$creator.",".
 		" ".$entity_id.");";
 		
-		echo "querry is: ".$query;
+		//echo "querry is: ".$query;
 		$result = $db->query($query);
-		//echo "result 3 : ";
-		//echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
+		
 		
 		$query = "SELECT *  FROM groups ORDER BY group_id desc limit 1 ; "	;
 		$result = $db->query($query);
@@ -82,12 +78,10 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 		" ".$row['group_id'].", ".
 		" ".$creator.", 1 );";		
-		echo "querry is: ".$query;
+		
+		//echo "querry is: ".$query;
 		$result = $db->query($query);
-		
-		//echo "result 4 : ";
-		//echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
-		
+			
 		echo json_encode($row);		
 	}
 
