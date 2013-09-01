@@ -26,8 +26,8 @@
 		
 	}
 	if($app->request()->isPost()){
-		$user  	= $app->request()->get(Tags::$user_id);
-		$group	= $app->request()->get(Tags::$group_id);	
+		$user  	= $app->request()->post(Tags::$user_id);
+		$group	= $app->request()->post(Tags::$group_id);	
 	
 		
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
