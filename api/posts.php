@@ -62,12 +62,12 @@
 	if($app->request()->isPost()){
 		
 		$creator =		$app->request()->post('creator');
-		$post_to =		$app->request()->post('post_to');
+		$post_to =		$app->request()->post('posted_to');
 		$post_text = 	$app->request()->post('post_text');
 		$post_date = 	$app->request()->post('post_date');
 
 		
-		$query ="INSERT INTO posts(creator, post_to, post_text, post_date)	SELECT".
+		$query ="INSERT INTO posts(creator, posted_to, post_text, post_date)	SELECT".
 		" ".$creator.",".
 		" ".$post_to.",".
 		" '".$post_text."',".

@@ -38,11 +38,19 @@
 		echo json_encode($user_array);
 		
 		if($app->request()->get(Tags::$op) == Tags::$group){
-					
+			$entity = $app->request()->get(Tags::$posted_to);
+			$query = "SELECT * from posts WHERE posted_to =".$entity." ORDER BY post_date desc limit 40 ; ";		
+			$result = $db->query($query);
+			
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 		}	
 
 		if($app->request()->get(Tags::$op) == Tags::$event){
-					
+			$entity = $app->request()->get(Tags::$posted_to);
+			$query = "SELECT * from posts WHERE posted_to =".$entity." ORDER BY post_date desc limit 40 ; ";			
+			$result = $db->query($query);
+			
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
 		}
 		
 		if($app->request()->get(Tags::$op) == Tags::$user){
@@ -54,7 +62,7 @@
 	if($app->request()->isPost()){
 		
 		$creator =		$app->request()->post('creator');
-		$post_to =		$app->request()->post('post_to');
+		$post_to =		$app->request()->post('posted_to');
 		$post_text = 	$app->request()->post('post_text');
 		$post_date = 	$app->request()->post('post_date');
 
