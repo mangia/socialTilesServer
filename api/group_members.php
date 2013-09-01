@@ -33,8 +33,8 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 		" ".$group.", ".
 		" ".$user.", 0 );";		
-		$allPostVars = $app->request->post();
-		echo $allPostVars;
+		$allPostVars = $app->request()->post();
+		echo json_encode($allPostVars);
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
 		//$row = $result->fetch(PDO::FETCH_ASSOC);
