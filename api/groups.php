@@ -66,7 +66,7 @@
 		" ".$creator",".
 		" ".$entity_id."";
 		
-		//echo "querry is: ".$query;
+		echo "querry is: ".$query;
 		$result = $db->query($query);
 		
 		$query = "SELECT *  FROM groups ORDER BY group_id desc limit 1 ; "	;
@@ -76,7 +76,7 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) SELECT".
 		" ".$row['ggroup_idroup_id'].", ".
 		" ".$creator.", 1 ;";		
-		
+		echo "querry is: ".$query;
 		
 		echo json_encode($row);		
 	}
