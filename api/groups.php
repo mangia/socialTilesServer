@@ -51,7 +51,7 @@
 			
 		$allPostVars = $app->request()->post();
 		
-		echo json_encode($allPostVars);		
+		//echo json_encode($allPostVars);		
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
