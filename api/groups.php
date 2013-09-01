@@ -18,7 +18,7 @@
 	
 	if($app->request()->isGet()){
 		
-		if(strcmp($app->request()->get(Tags::$op), 'user_groups') == 0){
+		if($app->request()->get(Tags::$op) == 'user_groups'){
 			$user = 	$app->request()->get(Tags::$user_id);		
 			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
 			$result = $db->query($query);
