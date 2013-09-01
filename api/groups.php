@@ -63,14 +63,14 @@
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
-		$query ="INSERT INTO groups(date_created, name, description,  creator, entity)	VALUES (".
+		$query ="INSERT INTO groups (date_created, name, description,  creator, entity)	VALUES (".
 		" '".$date_created."',".
 		" '".$name."',".
 		" '".$description."',".
 		" ".$creator.",".
 		" ".$entity_id.");";
 		
-		//echo "querry is: ".$query;
+		echo "querry is: ".$query;
 		$result = $db->query($query);
 		//echo "result 3 : ";
 		//echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
@@ -82,8 +82,9 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 		" ".$row['group_id'].", ".
 		" ".$creator.", 1 );";		
-		//echo "querry is: ".$query;
+		echo "querry is: ".$query;
 		$result = $db->query($query);
+		
 		//echo "result 4 : ";
 		//echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
 		
