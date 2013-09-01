@@ -39,6 +39,9 @@
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}
+		else{
+			echo json_encode($app->request()->get());		
+		}
 		
 		
 	}
