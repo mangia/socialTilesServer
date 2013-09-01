@@ -13,6 +13,11 @@ class Tags {
 	public static $event 		= "event";
 	public static $member 		= "member";
 	public static $posted_to 	= "posted_to";
+	public static $creator      = "creator";
+	
+	public static  $first_name       = "name_first";
+	public static  $last_name        = "name_last";
+	public static  $fbid             = "fbid";
 }
 
 ?>

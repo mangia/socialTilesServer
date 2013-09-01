@@ -42,7 +42,10 @@
 		else if ($app->request()->get(Tags::$op) == "group_info"){
 			$group = 	$app->request()->get(Tags::$group_id);		
 			$query = "SELECT *  FROM groups WHERE  group_id =".$group."; "	;
-			$result = $db->query($query);		
+			$result = $db->query($query);	
+			$group_info = $result->fetch(PDO::FETCH_ASSOC);
+			
+			echo json_encode($group_info);	
 		}
 		else{
 			echo $app->request()->get(Tags::$op);

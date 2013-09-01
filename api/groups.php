@@ -43,7 +43,15 @@
 			$group = 	$app->request()->get(Tags::$group_id);		
 			$query = "SELECT *  FROM groups WHERE  group_id =".$group."; "	;
 			$result = $db->query($query);	
-			echo json_encode($result->fetch(PDO::FETCH_ASSOC));	
+			$group_info = $result->fetch(PDO::FETCH_ASSOC);
+			
+			$query = "SELECT *  FROM users WHERE  user_id =".$group_info[Tags::$creator]."; "	;			
+			$result = $db->query($query);		
+			$row = $result->fetch(PDO::FETCH_ASSOC);
+			$group_info[Tags::$first_name] = $row[$first_name ];
+			$group_info[Tags::$last_name] = $row[$last_name ];
+			$group_info[Tags::$fbid] = $row[$fbid ];
+			echo json_encode($group_info);	
 		}
 		else{
 			echo $app->request()->get(Tags::$op);
