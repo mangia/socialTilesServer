@@ -49,6 +49,7 @@
 		$description = $app->request()->post('description');
 		$creator = $app->request()->post('creator');
 			
+		echo $app->request->post();		
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
