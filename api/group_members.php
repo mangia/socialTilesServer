@@ -21,12 +21,13 @@
 		$group	= $app->request()->get(Tags::$group_id);
 		$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."' AND gm.status = 1";
 		$result = $db->query($query);		
-		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
+		//echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
 				
 		if($app->request()->get(Tags::$op) == Tags::$user){
 			$query = "SELECT *  FROM users WHERE";			
 			$flag = true;			
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+				echo json_encode($row);
 				if(!$flag){
 					$query .= " OR ";
 				}
