@@ -54,13 +54,11 @@
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
-		echo "result 1 : ";
-		echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
+		
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
 		$result = $db->query($query);
-		echo "result 2 : ";
-		echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
+			
 				
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
@@ -74,8 +72,8 @@
 		
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
-		echo "result 3 : ";
-		echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
+		//echo "result 3 : ";
+		//echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
 		
 		$query = "SELECT *  FROM groups ORDER BY group_id desc limit 1 ; "	;
 		$result = $db->query($query);
@@ -86,8 +84,8 @@
 		" ".$creator.", 1 );";		
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
-		echo "result 4 : ";
-		echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
+		//echo "result 4 : ";
+		//echo  json_encode($result-> fetchAll(PDO::FETCH_ASSOC));	
 		
 		echo json_encode($row);		
 	}
