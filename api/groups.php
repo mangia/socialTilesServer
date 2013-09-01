@@ -49,7 +49,7 @@
 		$description = $app->request()->post('description');
 		$creator = $app->request()->post('creator');
 			
-		$allPostVars = $app->request()->post();
+		//$allPostVars = $app->request()->post();
 		
 		//echo json_encode($allPostVars);		
 		
@@ -69,7 +69,7 @@
 		" ".$creator.",".
 		" ".$entity_id.");";
 		
-		echo "querry is: ".$query;
+		//echo "querry is: ".$query;
 		$result = $db->query($query);
 		
 		$query = "SELECT *  FROM groups ORDER BY group_id desc limit 1 ; "	;
@@ -79,7 +79,7 @@
 		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 		" ".$row['group_id'].", ".
 		" ".$creator.", 1 );";		
-		echo "querry is: ".$query;
+		//echo "querry is: ".$query;
 		
 		echo json_encode($row);		
 	}
