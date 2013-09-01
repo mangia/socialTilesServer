@@ -38,6 +38,7 @@
 			}
 			
 			$query.=";";
+			echo $query;
 			$result = $db->query($query);
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
