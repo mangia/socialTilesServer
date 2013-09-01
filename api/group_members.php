@@ -17,10 +17,35 @@
 	$db = new PDO($dsn); 
 	
 	if($app->request()->isGet()){
+		
 		$group	= $app->request()->get(Tags::$group_id);
 		$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."' AND gm.status = 1";
 		$result = $db->query($query);		
-		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
+				
+		if($app->request()->get(Tags::$op) == Tags::$user){
+			$query = "SELECT *  FROM users WHERE";			
+			$flag = true;			
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+				if(!$flag){
+					$query .= " OR ";
+				}
+				else{
+					$flag = false;			
+				}
+				
+				$query .= "user_id =".$row[Tags::$user_id]."";			
+			}
+			
+			$query.=";";
+			$result = $db->query($query);
+			
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+		}
+		else{
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
+		}
+
 		
 	}
 	if($app->request()->isPost()){
