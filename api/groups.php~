@@ -50,7 +50,7 @@
 		$creator = $app->request()->post('creator');
 			
 		
-		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
+		$query = "INSERT INTO entities(type) SELECT ".Tags::$newUser.";";
 		$result = $db->query($query);
 		
 		$query = "SELECT id FROM  entities ORDER BY id desc limit 1 ; "	;
