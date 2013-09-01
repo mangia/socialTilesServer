@@ -1,4 +1,4 @@
-//select your_fields from your_table where your_condition order by oid desc limit 1; 
+
 
 <?php
 	require 'Slim/Slim.php';
@@ -60,10 +60,8 @@
 				
 		echo json_encode($row);		
 	}
-?>
-
-
-	/*$user_array = array();
+//select your_fields from your_table where your_condition order by oid desc limit 1; 
+/*$user_array = array();
 		 
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			$user_array['user_id']         = $row['user_id'];
@@ -75,3 +73,7 @@
 			$user_array['num_achievments'] = $row['num_achievments'];
 			$user_array['entity']          = $row['entity'];
 		}*/
+?>
+
+
+	

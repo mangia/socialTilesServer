@@ -1,5 +1,3 @@
-
-
 <?php
 	require 'Slim/Slim.php';
 	require 'tags.php';

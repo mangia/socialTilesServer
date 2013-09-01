@@ -5,7 +5,8 @@
 	\Slim\Slim::registerAutoloader();
 
 	$app = new \Slim\Slim();
-
+	
+	
 	$dsn = "pgsql:"
 			. "host=ec2-54-227-238-31.compute-1.amazonaws.com;"
     		. "dbname=d3r468400g680j;"
@@ -16,37 +17,38 @@
 	$db = new PDO($dsn); 
 	
 	if($app->request()->isGet()){
-		$fbid =$app->request()->get('fbid');
-		$query = "SELECT u.username, u.name_first, u.name_last, u.email_id, u.picture, u.location , u.fbid, u.age, u.total_score, u.total_duration, u.num_achievments  FROM users u WHERE u.fbid='".$fbid."'";
-		$result = $db->query($query);
-		$user_array = array();
-		/* select your_fields from your_table where your_condition order by 
-oid desc limit 1; */
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$user_array['group_id']           = $row['group_id'];
-			$user_array['creator']            = $row['creator'];
-			$user_array['name']               = $row['name'];
-			$user_array['description']        = $row['description'];
-			$user_array['date_created']       = $row['date_created'];
-			$user_array['total_duration']     = $row['total_duration'];
-			$user_array['entity']             = $row['entity'];
+		
+		if(strcmp($app->request()->get(Tags::$op), 'user_groups') == 0){
+			$user = 	$app->request()->get(Tags::$user_id);		
+			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
+			$result = $db->query($query);
+			
+			$query = "SELECT * from groups WHERE ";
+			$flag = true;
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+				if(!$flag){
+					$query .= " OR ";
+				}
+				else{
+					$flag = false;			
+				}			
+				$query.= "group_id = ".$row['group_id']."";
+			}
+			$query.=";";
+			$result = $db->query($query);
+			
+			echo json_encode($result);
 		}
 		
-		$res = $app->response();
 		
-		$res['Content-Type'] = 'application/json';
-		$res['X-Powered-By'] = 'Slim';
-		
-		echo json_encode($user_array);
 	}
 	if($app->request()->isPost()){
 		
-		$creator =  $app->request()->post('creator');
-		$name = $app->request()->post('name');
+		$name =  $app->request()->post('name');
+		$date_created = $app->request()->post('date_created');
 		$description = $app->request()->post('description');
-		$date = $app->request()->post('date_created');
-
-		
+		$creator = $app->request()->post('creator');
+			
 		
 		$query = "INSERT INTO entities(type) SELECT ".Tags::$newGroup.";";
 		$result = $db->query($query);
@@ -57,17 +59,41 @@ oid desc limit 1; */
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
-		$query ="INSERT INTO users(creator, name, description, date_created, entity)	SELECT".
-		" ".$creator.",".
+		$query ="INSERT INTO groups(date_created, name, description,  creator, entity)	SELECT".
+		" '".$date_created."',".
 		" '".$name."',".
 		" '".$description."',".
-		" '".$date."',".
+		" ".$creator",".
 		" ".$entity_id.";";
 		
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
 		
-			
+		$query = "SELECT *  FROM groups ORDER BY group_id desc limit 1 ; "	;
+		$result = $db->query($query);
+		$row = $result->fetch(PDO::FETCH_ASSOC);				
 		
+		$query = "INSERT INTO group_members(group_id, user_id, status) SELECT".
+		" ".$row['ggroup_idroup_id'].", ".
+		" ".$creator.", 1 ;";		
+		
+		
+		echo json_encode($row);		
 	}
+//select your_fields from your_table where your_condition order by oid desc limit 1; 
+/*$user_array = array();
+		 
+		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+			$user_array['user_id']         = $row['user_id'];
+			$user_array['fbid']            = $row['fbid'];
+			$user_array['name_first']      = $row['name_first'];
+			$user_array['name_last']       = $row['name_last'];
+			$user_array['total_score']     = $row['total_score'];
+			$user_array['total_duration']  = $row['total_duration'];
+			$user_array['num_achievments'] = $row['num_achievments'];
+			$user_array['entity']          = $row['entity'];
+		}*/
 ?>
+
+
+	

@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS friends (
 CREATE TABLE IF NOT EXISTS groups(
 	group_id      SERIAL   PRIMARY KEY,
 	date_created  DATE default now(),
-   name          VarCHAR(20),
+    name          VarCHAR(20),
 	description   VARCHAR(140),
 	creator       integer NOT NULL REFERENCES users(user_id),
 	entity        integer NOT NULL REFERENCES entities
@@ -93,7 +93,14 @@ CREATE TABLE IF NOT EXISTS posts(
 );
 
 CREATe TABLE IF NOT EXISTS goals(
-
+	goal_id      SERIAL PRIMARY KEY,
+	goal_name    VarCHAR(20) NOT NULL,
+	game_name    VARCHAR(25) NOT NULL,
+	goal_type    integer NOT NULL, 
+	threshold    integer NOT NULL,
+	reward       integer NOT NULL,
+	created_for  integer NOT NULL REFERENCES entities,
+	achieved_by  integer NOT NULL REFERENCES users(user_id)
 );
 
 
