@@ -19,6 +19,7 @@
 	if($app->request()->isGet()){
 		$group	= $app->request()->get(Tags::$group_id);
 		$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."'";
+		echo  $query ;	
 		$result = $db->query($query);		
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		echo json_encode($row);
@@ -36,7 +37,7 @@
 		//echo "querry is: ".$query;
 		$result = $db->query($query);
 		//$row = $result->fetch(PDO::FETCH_ASSOC);
-				
+		echo  $query ;	
 		//echo json_encode($row);		
 	}
 //select your_fields from your_table where your_condition order by oid desc limit 1; 
