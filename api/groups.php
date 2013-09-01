@@ -41,6 +41,10 @@
 		}
 		else{
 			echo json_encode($app->request()->get());		
+			echo strcmp($app->request()->get(Tags::$op), 'user_groups');
+			echo $app->request()->get(Tags::$op) == 'user_groups' ;
+			echo strcmp($app->request()->get(Tags::$op), "user_groups");
+			echo $app->request()->get(Tags::$op) == "user_groups" ;
 		}
 		
 		
