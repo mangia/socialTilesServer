@@ -61,6 +61,8 @@
 		//$allPostVars = $app->request()->post();
 		//echo json_encode($allPostVars);
 		$result = $db->query($query);
+		
+		echo "ok";
 	}
 
 ?>
