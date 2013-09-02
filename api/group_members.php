@@ -25,7 +25,7 @@
 		if($app->request()->get(Tags::$op) == Tags::$user){
 			$query = "SELECT *  FROM users WHERE ";			
 			$flag = true;			
-			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+			//while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 				//echo json_encode($row);
 				/*if(!$flag){
 					$query .= " OR ";

@@ -48,7 +48,7 @@
 		}
 		else{
 			$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."' AND gm.status = 1";
-		$result = $db->query($query);		
+			$result = $db->query($query);		
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 		}
 
