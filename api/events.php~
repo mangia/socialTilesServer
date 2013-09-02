@@ -43,7 +43,7 @@
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
-		$query ="INSERT INTO events (creator,name,type_of_participants,reward_text,date_created,start_date,end_date,reward_points, entity)	SELECT".
+		$query ="INSERT INTO events (creator,name,type_of_participants,reward_text,date_created,start_date,end_date,reward_points, entity)	SELECT ".
 		" ".$creator.",".
 		" '".$name."',".
 		" ".$type_of_participants.",".
@@ -57,7 +57,11 @@
 		echo "querry is: ".$query;
 		$result = $db->query($query);
 		
-			
+		$query = "SELECT *  FROM events ORDER BY event_id desc limit 1 ; "	;
+		$result = $db->query($query);
+		$row = $result->fetch(PDO::FETCH_ASSOC);	
+		
+		echo json_encode($row);
 		
 	}
 ?>

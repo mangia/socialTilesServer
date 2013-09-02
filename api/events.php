@@ -54,10 +54,14 @@
 		" ".$reward_points.", ".
 		" ".$entity_id.";";
 		
-		echo "querry is: ".$query;
+		//echo "querry is: ".$query;
 		$result = $db->query($query);
 		
-			
+		$query = "SELECT *  FROM events ORDER BY event_id desc limit 1 ; "	;
+		$result = $db->query($query);
+		$row = $result->fetch(PDO::FETCH_ASSOC);	
+		
+		echo json_encode($row);
 		
 	}
 ?>
