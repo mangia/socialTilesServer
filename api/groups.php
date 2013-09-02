@@ -23,7 +23,7 @@
 			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
 			$result = $db->query($query);
 			
-			$query = "SELECT * from groups g, users u WHERE ";
+			$query = "SELECT DISTINCT ON (g.group_id) * from groups g, users u WHERE ";
 			$flag = true;
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 				if(!$flag){

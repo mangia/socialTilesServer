@@ -23,7 +23,7 @@
 			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
 			$result = $db->query($query);
 			
-			$query = "SELECT * from groups g, users u WHERE ";
+			$query = "SELECT DISTINCT ON (g.group_id) * from groups g, users u WHERE ";
 			$flag = true;
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 				if(!$flag){
@@ -38,7 +38,7 @@
 
 
 			$result = $db->query($query);
-			
+			echo $query;
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}
 		else if ($app->request()->get(Tags::$op) == "group_info"){
