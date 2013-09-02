@@ -9,7 +9,7 @@
 	
 	$dsn = "pgsql:"
 			. "host=ec2-54-227-238-31.compute-1.amazonaws.com;"
-    		. "dbname=d3r468400g680j;"
+    		. "dbname= d3r468400g680j;"
     		. "user=wzcdebwgjfehyz;"
     		. "port=5432;"
     		. "sslmode=require;"

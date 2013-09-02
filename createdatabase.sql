@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS events(
 	date_created          DATE NOT NULL default now(),
 	creator               integer NOT NULL REFERENCES users(user_id),	
 	type_of_participants  integer NOT NULL,  -- 0: users, 1: groups,
-	reward_points         integer, NOT NULL,
+	reward_points         integer NOT NULL,
 	entity                integer NOT NULL REFERENCES entities
 	
 );
