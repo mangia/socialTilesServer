@@ -51,7 +51,7 @@
 		
 	}
 	if($app->request()->isPost()){
-		if($app->request()->post(Tags::$op == "sinngle"){
+		if($app->request()->post(Tags::$op) == "sinngle"){
 			$user  	= $app->request()->post(Tags::$user_id);
 			$group	= $app->request()->post(Tags::$group_id);	
 			$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
@@ -60,7 +60,7 @@
 			$result = $db->query($query);
 		}
 		else if($app->request()->post(Tags::$op) == "multiple"){
-			$user_ids = json_decode($$app->request()->post(Tags::$user_ids);, true) ;
+			$user_ids = json_decode($$app->request()->post(Tags::$user_ids), true) ;
 			echo $user_ids;
 			foreach ($user_ids as $i => $value){
 				echo $user_ids[$i];
