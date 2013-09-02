@@ -57,8 +57,6 @@
 			$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
 			" ".$group.", ".
 			" ".$user.", 0 );";		
-		//$allPostVars = $app->request()->post();
-		//echo json_encode($allPostVars);
 			$result = $db->query($query);
 		}
 		else if($app->request()->post(Tags::$op) == "multiple"){
