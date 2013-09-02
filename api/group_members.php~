@@ -60,7 +60,7 @@
 			$result = $db->query($query);
 		}
 		else if($app->request()->post(Tags::$op) == "multiple"){
-			$user_ids = json_decode($$app->request()->post(Tags::$user_ids), true) ;
+			$user_ids = $app->request()->post(Tags::$user_ids) ;
 			echo $user_ids;
 			foreach ($user_ids as $i => $value){
 				echo $user_ids[$i];
