@@ -35,6 +35,7 @@
 				$query.= "g.group_id = ".$row['group_id']."";
 			}
 			$query.="u.user_id = g.creator;";
+			echo $query;
 			$result = $db->query($query);
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
