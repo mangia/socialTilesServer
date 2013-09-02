@@ -38,7 +38,7 @@
 
 
 			$result = $db->query($query);
-			
+			echo $query;
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}
 		else if ($app->request()->get(Tags::$op) == "group_info"){
