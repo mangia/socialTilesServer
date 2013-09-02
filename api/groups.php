@@ -35,7 +35,8 @@
 				$query.= "g.group_id = ".$row['group_id']."";
 			}
 			$query.=" AND u.user_id = g.creator;";
-			echo $query;
+
+
 			$result = $db->query($query);
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
@@ -46,16 +47,6 @@
 			$result = $db->query($query);	
 			$group_info = $result->fetch(PDO::FETCH_ASSOC);
 			
-			/*$query = "SELECT *  FROM users WHERE  user_id =".$group_info[Tags::$creator]."; "	;			
-			$result = $db->query($query);		
-			$row = $result->fetch(PDO::FETCH_ASSOC);
-			
-			//echo json_encode($query);
-			//echo json_encode($row);			
-			
-			$group_info[Tags::$first_name] 	= $row[Tags::$first_name ];
-			$group_info[Tags::$last_name] 	= $row[Tags::$last_name ];
-			$group_info[Tags::$fbid] 			= $row[Tags::$fbid ];*/
 			echo json_encode($group_info);	
 		}
 		else{
