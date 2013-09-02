@@ -19,7 +19,7 @@
 	if($app->request()->isGet()){
 			if($app->request()->get(Tags::$op) == Tags::$group){
 			$entity = $app->request()->get(Tags::$posted_to);
-			$query = "SELECT * from posts WHERE posted_to =".$entity." ORDER BY post_date desc limit 40 ; ";		
+			$query = "SELECT * from posts p, users u WHERE p.posted_to =".$entity." AND p.creator = u.user_id ORDER BY post_date desc limit 40 ; ";		
 			$result = $db->query($query);
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
