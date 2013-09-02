@@ -51,7 +51,7 @@
 		
 	}
 	if($app->request()->isPost()){
-		if($app->request()->post(Tags::$op == "sinngle"){}
+		if($app->request()->post(Tags::$op == "sinngle"){
 			$user  	= $app->request()->post(Tags::$user_id);
 			$group	= $app->request()->post(Tags::$group_id);	
 			$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
