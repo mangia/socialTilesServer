@@ -43,7 +43,7 @@
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));*/
 			$query = "SELECT DISTINCT ON (u.user_id) * FROM group_members gm, users u WHERE gm.group_id='".$group."' AND gm.status = 1 AND gm.user_id = u.user_id";
-			echo $query;
+			//echo $query;
 						
 			$result = $db->query($query);			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
