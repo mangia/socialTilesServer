@@ -43,7 +43,7 @@
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 		$entity_id = $row['id'];	
 		
-		$query ="INSERT INTO users(creator,name,type_of_participants,reward_text,date_created,start_date,end_date,reward_points, entity)	SELECT".
+		$query ="INSERT INTO events (creator,name,type_of_participants,reward_text,date_created,start_date,end_date,reward_points, entity)	SELECT ".
 		" ".$creator.",".
 		" '".$name."',".
 		" ".$type_of_participants.",".
