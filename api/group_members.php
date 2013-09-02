@@ -61,6 +61,8 @@
 		}
 		else if($app->request()->post(Tags::$op) == "multiple"){
 			$user_ids = $app->request()->post(Tags::$user_ids) ;
+			
+			echo json_decode($user_ids, true);
 			echo $user_ids;
 			echo gettype($user_ids);
 			foreach ($user_ids as $i => $value){
