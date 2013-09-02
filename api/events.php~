@@ -51,7 +51,7 @@
 		" '".$date."',".
 		" '".$start_date."',".
 		" '".$end_date."',".
-		" ".$reward_points." ".
+		" ".$reward_points.", ".
 		" ".$entity_id.";";
 		
 		//echo "querry is: ".$query;

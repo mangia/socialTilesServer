@@ -54,7 +54,7 @@
 		" ".$reward_points.", ".
 		" ".$entity_id.";";
 		
-		//echo "querry is: ".$query;
+		echo "querry is: ".$query;
 		$result = $db->query($query);
 		
 			
