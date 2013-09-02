@@ -41,11 +41,11 @@
 		}
 		else if ($app->request()->get(Tags::$op) == "group_info"){
 			$group = 	$app->request()->get(Tags::$group_id);		
-			$query = "SELECT *  FROM groups WHERE  group_id =".$group."; "	;
+			$query = "SELECT *  FROM groups g, users u WHERE  g.group_id =".$group." AND u.user_id = g.creator; "	;
 			$result = $db->query($query);	
 			$group_info = $result->fetch(PDO::FETCH_ASSOC);
 			
-			$query = "SELECT *  FROM users WHERE  user_id =".$group_info[Tags::$creator]."; "	;			
+			/*$query = "SELECT *  FROM users WHERE  user_id =".$group_info[Tags::$creator]."; "	;			
 			$result = $db->query($query);		
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			
@@ -54,7 +54,7 @@
 			
 			$group_info[Tags::$first_name] 	= $row[Tags::$first_name ];
 			$group_info[Tags::$last_name] 	= $row[Tags::$last_name ];
-			$group_info[Tags::$fbid] 			= $row[Tags::$fbid ];
+			$group_info[Tags::$fbid] 			= $row[Tags::$fbid ];*/
 			echo json_encode($group_info);	
 		}
 		else{
