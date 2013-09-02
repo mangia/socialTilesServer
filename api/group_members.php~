@@ -51,17 +51,20 @@
 		
 	}
 	if($app->request()->isPost()){
-		$user  	= $app->request()->post(Tags::$user_id);
-		$group	= $app->request()->post(Tags::$group_id);	
-	
-		
-		$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
-		" ".$group.", ".
-		" ".$user.", 0 );";		
+		if($app->request()->post(Tags::$op == "sinngle"){}
+			$user  	= $app->request()->post(Tags::$user_id);
+			$group	= $app->request()->post(Tags::$group_id);	
+			$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
+			" ".$group.", ".
+			" ".$user.", 0 );";		
 		//$allPostVars = $app->request()->post();
 		//echo json_encode($allPostVars);
-		$result = $db->query($query);
-		
+			$result = $db->query($query);
+		}
+		else if($app->request()->post(Tags::$op) == "multiple"){
+			$user_ids = json_decode($$app->request()->post(Tags::$user_ids);, true) ;
+			echo $user_ids;
+		}
 		echo "ok";
 	}
 

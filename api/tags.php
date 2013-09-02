@@ -20,6 +20,7 @@ class Tags {
 	public static  $fbid             = "fbid";
 	public static  $from_user 	= "from_user";
 	public static  $to_user     = "to_user";
+	public static  $user_ids 	= "user_ids";
 }
 
 ?>
