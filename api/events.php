@@ -17,7 +17,12 @@
 	
 	if($app->request()->isGet()){
 		if($app->request()->get(Tags::$op) == "user_events"){
-			
+			$user_id = 	 $app->request()->get(Tags::$user_id);	
+			$user_entity= $app->request()->get(Tags::$enity);	
+			$query = "SELECT e.creator, e.name,e.type_of_participants, e.date,e.start_date,e.end_date,e.reward_text,e.reward_points  ".
+			"  FROM event_participants ep, events e WHERE  ep.participant =".$user_id." AND ep.event = e.event_id ;";
+			$result = $db->query($query);
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 		}		
 		else if ($app->request()->get(Tags::$op) == "event_info"){		
 			$event_id =$app->request()->get('event_id');

@@ -16,11 +16,22 @@
 	$db = new PDO($dsn); 
 	
 	if($app->request()->isGet()){
-		$fbid =$app->request()->get('fbid');
-		$query = "SELECT u.username, u.name_first, u.name_last, u.email_id, u.picture, u.location , u.fbid, u.age, u.total_score, u.total_duration, u.num_achievments  FROM users u WHERE u.fbid='".$fbid."'";
-		$result = $db->query($query);
+		if($app->request()->get(Tags::$op) == "user_events"){
+			$user_id = 	 $app->request()->get(Tags::$user_id);	
+			$user_entity= $app->request()->get(Tags::$enity);	
+			$query = "SELECT e.creator, e.name,e.type_of_participants, e.date,e.start_date,e.end_date,e.reward_text,e.reward_points  ".
+			"  FROM event_participants ep, events e, groups p, group_members gm WHERE  ep.participant =".$user_entity." "	.
+			"OR (e.type_of_participants= 1 AND e.event_id =ep.events AND ep.participant = g.entity AND gm.group_id = g.group_id  AND gm.user_id = ".$user_id." ); ";
+			$result = $db->query($query);
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+		}		
+		else if ($app->request()->get(Tags::$op) == "event_info"){		
+			$event_id =$app->request()->get('event_id');
+			$query = "SELECT *  FROM events e, users u WHERE e.event_id=".$event_id." AND u.user_id = e.creator;";
+			$result = $db->query($query);
 			//echo $query;
-		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+		}
 	}
 	if($app->request()->isPost()){
 		

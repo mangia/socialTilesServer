@@ -77,7 +77,8 @@ CREATE TABLE IF NOT EXISTS events(
 
 CREATE TABLE IF NOT EXISTS event_participants(
 	event_participants_id  SERIAL PRIMARY KEY,
-	participant            integer  NOT NULL REFERENCES entities,
+	participant            integer  NOT NULL REFERENCES users(user_id),
+	group_id               integer            REFERENCES groups,
 	event                  integer  NOT NULL REFERENCES events,
 	status                 integer  NOT NULL default 0, -- 0: pending, 1: participating
 	UNIQUE(event, participant)
