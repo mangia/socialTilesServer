@@ -61,12 +61,17 @@
 		}
 		else if($app->request()->post(Tags::$op) == "multiple"){
 			$user_idss = $app->request()->post(Tags::$user_ids) ;
+			$group	= $app->request()->post(Tags::$group_id);
 			$user_ids = json_decode($user_idss, true);
 			var_dump($user_ids); 
 			//echo $user_ids;
-			echo gettype($user_ids);
+
 			foreach ($user_ids as $i => $value){
 				echo $user_ids[$i];
+				$query = "INSERT INTO group_members(group_id, user_id, status) VALUES (".
+			" ".$group.", ".
+			" ". $user_ids[$i].", 0 );";		
+			$result = $db->query($query);
 			}
 			
 		}
