@@ -16,11 +16,16 @@
 	$db = new PDO($dsn); 
 	
 	if($app->request()->isGet()){
-		$fbid =$app->request()->get('fbid');
-		$query = "SELECT u.username, u.name_first, u.name_last, u.email_id, u.picture, u.location , u.fbid, u.age, u.total_score, u.total_duration, u.num_achievments  FROM users u WHERE u.fbid='".$fbid."'";
-		$result = $db->query($query);
+		if($app->request()->get(Tags::$op) == "user_events"){
+			
+		}		
+		else if ($app->request()->get(Tags::$op) == "event_info"){		
+			$event_id =$app->request()->get('event_id');
+			$query = "SELECT *  FROM events e, users u WHERE e.event_id=".$event_id." AND u.user_id = e.creator;";
+			$result = $db->query($query);
 			//echo $query;
-		echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+		}
 	}
 	if($app->request()->isPost()){
 		
