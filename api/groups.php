@@ -34,7 +34,7 @@
 				}			
 				$query.= "g.group_id = ".$row['group_id']."";
 			}
-			$query.=" ;";
+			$query.=" AND u.user_id = g.creator;";
 
 
 			$result = $db->query($query);
