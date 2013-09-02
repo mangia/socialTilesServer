@@ -23,7 +23,7 @@
 			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
 			$result = $db->query($query);
 			
-			$query = "SELECT * from groups WHERE ";
+			$query = "SELECT * from groups g, users u WHERE ";
 			$flag = true;
 			while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 				if(!$flag){
@@ -32,9 +32,9 @@
 				else{
 					$flag = false;			
 				}			
-				$query.= "group_id = ".$row['group_id']."";
+				$query.= "g.group_id = ".$row['group_id']."";
 			}
-			$query.=";";
+			$query.="u.user_id = g.creator;";
 			$result = $db->query($query);
 			
 			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
