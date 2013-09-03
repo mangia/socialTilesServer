@@ -51,7 +51,7 @@
 			if($row['type_of_participants'] == 0){
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES (".
 				" ".$event.", ".
-				" ".$participant.", 0, -1 );";		
+				" ".$participant.", 1, -1 );";		
 				echo $query ;
 				$result = $db->query($query);
 			}
@@ -63,7 +63,7 @@
 								
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$participant."),";
+					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 1, ".$participant."),";
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";

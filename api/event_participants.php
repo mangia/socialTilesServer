@@ -49,9 +49,9 @@
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			
 			if($row['type_of_participants'] == 0){
-				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES (".
+				$query = "INSERT INTO event_participants (event, participant, status) VALUES (".
 				" ".$event.", ".
-				" ".$participant.", 1, -1 );";		
+				" ".$participant.", 1 );";		
 				echo $query ;
 				$result = $db->query($query);
 			}
@@ -63,7 +63,7 @@
 								
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 1, ".$participant."),";
+					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 1 ".$participant."),";
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
@@ -85,9 +85,9 @@
 			if($row['type_of_participants'] == 0){
 				foreach ($participants as $i => $value){
 					//echo $user_ids[$i];
-					$query = "INSERT INTO event_participants(event, participant, status, group_id) VALUES (".
+					$query = "INSERT INTO event_participants(event, participant, status) VALUES (".
 					" ".$event.", ".
-					" ". $participantss[$i].", 0, -1 );";		
+					" ". $participantss[$i].", 0 );";		
 					$result = $db->query($query);
 				}
 			}
