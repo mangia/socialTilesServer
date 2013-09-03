@@ -58,12 +58,12 @@
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
-			
+			echo $row['type_of_participants'] ;
 			if($row['type_of_participants'] == 0){
 				$query = "INSERT INTO event_participants (event, participant, status) VALUES (".
 				" ".$event.", ".
 				" ".$participant.", 1 );";		
-				echo $query ;
+				//echo $query ;
 				$result = $db->query($query);
 			}
 			else {

@@ -70,15 +70,15 @@
 
 				$query = "SELECT * FROM group_members gm WHERE gm.group_id =".$participant." ;";
 				$result = $db->query($query);
-				echo $query;
+				//echo $query;
 							
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 1 ".$participant."),";
+					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 1, ".$participant."),";
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
-				echo $query;
+				//echo $query;
 				$result = $db->query($query);
 			}
 			
