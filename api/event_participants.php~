@@ -18,13 +18,35 @@
 	
 	if($app->request()->isGet()){
 		
+		$event	= $app->request()->post(Tags::$event_id );	
+		$query = "SELECT * FROM events WHERE event_id =".$event." ;";
+		$result = $db->query($query);
+		$row = $result->fetch(PDO::FETCH_ASSOC);		
+		
+		if($row['type_of_participants'] == 0){
+			if($app->request()->get(Tags::$op) == Tags::$user){
+				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event_id='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
+			}
+			else{
+				$query = "SELECT *  FROM event_participants ep WHERE ep.event_id='".$event."' AND ep.status = 1";
+				$result = $db->query($query);		
+				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
+			}
+		}
+		else {
+			if($app->request()->get(Tags::$op) == Tags::$user){
+							
+			}
+			else{
+				
+			}
+		}
+	
 		$group	= $app->request()->get(Tags::$group_id);
 		
 		//echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
 				
 		if($app->request()->get(Tags::$op) == Tags::$user){
-			$query = "SELECT *  FROM users WHERE ";			
-			$flag = true;			
 			
 			$query = "SELECT DISTINCT ON (u.user_id) * FROM group_members gm, users u WHERE gm.group_id='".$group."' AND gm.status = 1 AND gm.user_id = u.user_id";
 			//echo $query;
@@ -87,13 +109,13 @@
 				
 				$query = "INSERT INTO event_participants(event, participant, status) VALUES ";
 				foreach ($participants as $i => $value){
-					echo $participantss[$i];
+					//echo $participantss[$i];
 					$query .= " ( ".$event.", ". $participants[$i].", 1 ),";		
 					
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
-				echo $query;
+				//echo $query;
 				$result = $db->query($query);	
 			}
 			else{
@@ -106,7 +128,7 @@
 					else{
 						$flag = false;			
 					}	
-					$query .=	"gm.group_id =".$participantss[$i]." "; 					
+					$query .=	"gm.group_id =".$participants[$i]." "; 					
 				}		
 				$query .= ";";
 				$result = $db->query($query);	

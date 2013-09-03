@@ -18,27 +18,33 @@
 	
 	if($app->request()->isGet()){
 		
-		$group	= $app->request()->get(Tags::$group_id);
+		$event	= $app->request()->post(Tags::$event_id );	
+		$query = "SELECT * FROM events WHERE event_id =".$event." ;";
+		$result = $db->query($query);
+		$row = $result->fetch(PDO::FETCH_ASSOC);		
 		
-		//echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));		
-				
-		if($app->request()->get(Tags::$op) == Tags::$user){
-			$query = "SELECT *  FROM users WHERE ";			
-			$flag = true;			
+		if($row['type_of_participants'] == 0){
+			if($app->request()->get(Tags::$op) == Tags::$user){
+				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event_id='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
+			}
+			else{
+				$query = "SELECT *  FROM event_participants ep WHERE ep.event_id='".$event."' AND ep.status = 1";
+				$result = $db->query($query);		
+				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
+			}
+		}
+		else {
+			$group	= $app->request()->get(Tags::$group_id);
+			if($app->request()->get(Tags::$op) == Tags::$user){
+				$query = "SELECT DISTINCT ON (g.group_id) * FROM event_participants ep, users u, groups g WHERE ep.event_id='".$event."' AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id =".$group." ";			
+			}
+			else{
+				$query = "SELECT *  FROM event_participants ep WHERE ep.event_id='".$event."' AND ep.status = 1";
+				$result = $db->query($query);		
+				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
+			}
+		}
 			
-			$query = "SELECT DISTINCT ON (u.user_id) * FROM group_members gm, users u WHERE gm.group_id='".$group."' AND gm.status = 1 AND gm.user_id = u.user_id";
-			//echo $query;
-						
-			$result = $db->query($query);			
-			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
-		}
-		else{
-			$query = "SELECT *  FROM group_members gm WHERE gm.group_id='".$group."' AND gm.status = 1";
-			$result = $db->query($query);		
-			echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
-		}
-
-		
 	}
 	if($app->request()->isPost()){
 		if($app->request()->post(Tags::$op) == "single"){
@@ -93,7 +99,7 @@
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
-				echo $query;
+				//echo $query;
 				$result = $db->query($query);	
 			}
 			else{
@@ -106,7 +112,7 @@
 					else{
 						$flag = false;			
 					}	
-					$query .=	"gm.group_id =".$participantss[$i]." "; 					
+					$query .=	"gm.group_id =".$participants[$i]." "; 					
 				}		
 				$query .= ";";
 				$result = $db->query($query);	
