@@ -75,8 +75,8 @@
 			$participantss = $app->request()->post('participants') ;
 			$event	= $app->request()->post(Tags::$event_id );	
 			$participants = json_decode($participantss, true);
-			//var_dump($user_ids); 
-			//echo $user_ids;
+			var_dump($participants); 
+			echo $participants;
 			
 						
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
