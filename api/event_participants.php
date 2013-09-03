@@ -101,7 +101,7 @@
 					}	
 					$query .=	"gm.group_id =".$participantss[$i]." "; 					
 				}		
-				$query .= ";"
+				$query .= ";";
 				$result = $db->query($query);	
 				
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
