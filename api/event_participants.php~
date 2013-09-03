@@ -39,7 +39,7 @@
 		else {
 			$group	= $app->request()->get(Tags::$group_id);
 			if($app->request()->get(Tags::$op) == Tags::$user){
-				$query = "SELECT DISTINCT ON  * FROM event_participants ep, users u WHERE ep.event='".$event."' AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id =".$group." ";			
+				$query = "SELECT * FROM event_participants ep, users u WHERE ep.event=".$event." AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id =".$group." ";			
 				//echo $query;				
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
