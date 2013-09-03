@@ -26,7 +26,7 @@
 		if($row['type_of_participants'] == 0){
 			if($app->request()->get(Tags::$op) == Tags::$user){
 				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
-				echo $query;				
+				//echo $query;				
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 			}
@@ -70,14 +70,15 @@
 
 				$query = "SELECT * FROM group_members gm WHERE gm.group_id =".$participant." ;";
 				$result = $db->query($query);
-				
-								
+				echo $query;
+							
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 1 ".$participant."),";
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
+				echo $query;
 				$result = $db->query($query);
 			}
 			
