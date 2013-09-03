@@ -18,7 +18,7 @@
 	
 	if($app->request()->isGet()){
 		
-		$event	= $app->request()->post(Tags::$event_id );	
+		$event	= $app->request()->get(Tags::$event_id );	
 		$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 		$result = $db->query($query);
 		$row = $result->fetch(PDO::FETCH_ASSOC);		
