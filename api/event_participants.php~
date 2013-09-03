@@ -40,7 +40,7 @@
 			$group	= $app->request()->get(Tags::$group_id);
 			if($app->request()->get(Tags::$op) == Tags::$user){
 				$query = "SELECT DISTINCT ON (g.group_id) * FROM event_participants ep, users u, groups g WHERE ep.event='".$event."' AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id =".$group." ";			
-				echo $query;				
+				//echo $query;				
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
 			}
@@ -59,7 +59,7 @@
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
-			echo $row['type_of_participants'] ;
+			//echo $row['type_of_participants'] ;
 			if($row['type_of_participants'] == 0){
 				$query = "INSERT INTO event_participants (event, participant, status) VALUES (".
 				" ".$event.", ".
@@ -130,7 +130,7 @@
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
-				echo $query;
+				//echo $query;
 				$result = $db->query($query);	
 			}
 			
