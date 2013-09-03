@@ -77,17 +77,18 @@
 			$participants = json_decode($participantss, true);
 			//var_dump($participants); 
 			//echo $participants;
-			
-						
+
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
+		
+		
 			if($row['type_of_participants'] == 0){
 				
 				$query = "INSERT INTO event_participants(event, participant, status) VALUES ";
 				foreach ($participants as $i => $value){
-					echo $participantss[$i];
-					$query .= " ( ".$event.", ". $participantss[$i].", 1 ),";		
+					//echo $participantss[$i];
+					$query .= " ( ".$event.", ". $participants[$i].", 1 ),";		
 					
 				}
 				$query = substr($query, 0, -1);
