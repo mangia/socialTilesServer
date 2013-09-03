@@ -25,13 +25,13 @@
 		
 		if($row['type_of_participants'] == 0){
 			if($app->request()->get(Tags::$op) == Tags::$user){
-				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event_id='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
+				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
 				echo $query;				
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 			}
 			else{
-				$query = "SELECT *  FROM event_participants ep WHERE ep.event_id='".$event."' AND ep.status = 1";
+				$query = "SELECT *  FROM event_participants ep WHERE ep.event='".$event."' AND ep.status = 1";
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 			}
@@ -39,12 +39,12 @@
 		else {
 			$group	= $app->request()->get(Tags::$group_id);
 			if($app->request()->get(Tags::$op) == Tags::$user){
-				$query = "SELECT DISTINCT ON (g.group_id) * FROM event_participants ep, users u, groups g WHERE ep.event_id='".$event."' AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id =".$group." ";			
+				$query = "SELECT DISTINCT ON (g.group_id) * FROM event_participants ep, users u, groups g WHERE ep.event='".$event."' AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id =".$group." ";			
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
 			}
 			else{
-				$query = "SELECT *  FROM event_participants ep WHERE ep.event_id='".$event."' AND ep.status = 1";
+				$query = "SELECT *  FROM event_participants ep WHERE ep.event='".$event."' AND ep.status = 1";
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 			}
