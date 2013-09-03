@@ -87,9 +87,12 @@
 					//echo $user_ids[$i];
 					$query = "INSERT INTO event_participants(event, participant, status) VALUES (".
 					" ".$event.", ".
-					" ". $participantss[$i].", 0 );";		
-					$result = $db->query($query);
+					" ". $participantss[$i].", 1 ),";		
+					
 				}
+				$query .=";";
+				echo $query;
+				$result = $db->query($query);
 			}
 			else{
 				$query = "SELECT * FROM group_members gm WHERE ";
