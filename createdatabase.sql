@@ -101,7 +101,8 @@ CREATe TABLE IF NOT EXISTS goals(
 	threshold    integer NOT NULL,
 	reward       integer NOT NULL,
 	created_for  integer NOT NULL REFERENCES entities,
-	achieved_by  integer NOT NULL REFERENCES users(user_id)
+	achieved_by  integer NOT NULL REFERENCES users(user_id),
+	currently    integer NOT NULL DEFAULT 0
 );
 
 
