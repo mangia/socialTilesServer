@@ -47,21 +47,23 @@
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
+			
 			if($row['type_of_participants'] == 0){
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES (".
 				" ".$event.", ".
 				" ".$participant.", 0, -1 );";		
+				echo $query ;
 				$result = $db->query($query);
 			}
 			else {
-				$group = $app->request()->post(Tags::$group_id);
-				$query = "SELECT * FROM group_members gm WHERE gm.group_id =".$group." ;";
+
+				$query = "SELECT * FROM group_members gm WHERE gm.group_id =".$participant." ;";
 				$result = $db->query($query);
 				
 								
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$group."),";
+					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$participant."),";
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
@@ -101,7 +103,7 @@
 					}	
 					$query .=	"gm.group_id =".$participantss[$i]." "; 					
 				}		
-				$query .= ";"
+				$query .= ";";
 				$result = $db->query($query);	
 				
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
