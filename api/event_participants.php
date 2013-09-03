@@ -75,8 +75,8 @@
 			$participantss = $app->request()->post('participants') ;
 			$event	= $app->request()->post(Tags::$event_id );	
 			$participants = json_decode($participantss, true);
-			var_dump($participants); 
-			echo $participants;
+			//var_dump($participants); 
+			//echo $participants;
 			
 						
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
@@ -86,7 +86,7 @@
 				
 				$query = "INSERT INTO event_participants(event, participant, status) VALUES ";
 				foreach ($participants as $i => $value){
-					//echo $user_ids[$i];
+					echo $participantss[$i];
 					$query .= " ( ".$event.", ". $participantss[$i].", 1 ),";		
 					
 				}
