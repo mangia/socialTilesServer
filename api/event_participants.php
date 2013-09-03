@@ -26,6 +26,7 @@
 		if($row['type_of_participants'] == 0){
 			if($app->request()->get(Tags::$op) == Tags::$user){
 				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event_id='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
+				echo $query;				
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));	
 			}
