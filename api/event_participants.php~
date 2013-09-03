@@ -83,16 +83,17 @@
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			if($row['type_of_participants'] == 0){
+				
+				$query = "INSERT INTO event_participants(event, participant, status) VALUES ";
 				foreach ($participants as $i => $value){
 					//echo $user_ids[$i];
-					$query = "INSERT INTO event_participants(event, participant, status) VALUES (".
-					" ".$event.", ".
-					" ". $participantss[$i].", 1 ),";		
+					$query .= " ( ".$event.", ". $participantss[$i].", 1 ),";		
 					
 				}
-				$query .=";";
+				$query = substr($query, 0, -1);
+				$query .= " ;";
 				echo $query;
-				$result = $db->query($query);
+				$result = $db->query($query);	
 			}
 			else{
 				$query = "SELECT * FROM group_members gm WHERE ";
@@ -115,6 +116,7 @@
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
+				echo $query;
 				$result = $db->query($query);	
 			}
 			

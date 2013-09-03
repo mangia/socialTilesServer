@@ -74,7 +74,7 @@
 		else if($app->request()->post(Tags::$op) == "multiple"){
 			$participantss = $app->request()->post('participants') ;
 			$event	= $app->request()->post(Tags::$event_id );	
-			$participantss = json_decode($participantsss, true);
+			$participants = json_decode($participantss, true);
 			//var_dump($user_ids); 
 			//echo $user_ids;
 			
