@@ -101,7 +101,7 @@
 				$query = "INSERT INTO event_participants(event, participant, status) VALUES ";
 				foreach ($participants as $i => $value){
 					//echo $participantss[$i];
-					$query .= " ( ".$event.", ". $participants[$i].", 1 ),";		
+					$query .= " ( ".$event.", ". $participants[$i].", 0 ),";		
 					
 				}
 				$query = substr($query, 0, -1);
@@ -122,32 +122,23 @@
 					$query .=	"gm.group_id =".$participants[$i]." "; 					
 				}		
 				$query .= ";";
-				//echo $query;
 				$result = $db->query($query);	
 				
-				//$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
+
 				$queries = array();
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 					$query1 = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 					$query1 .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id].");";
 					
-					//echo "query is: ";					
-					//echo $query1;
 					$queries[] = $query1; 
-					//$result1 = $db->query($query1);	
+
 				}
 			
-				//var_dump($queries);
 				$i = 0;
 				foreach($queries as $q)	{
-					echo $q;
+					//echo $q;
 					$result = $db->query($q);				
-				}			
-				
-				//$query = substr($query, 0, -1);
-				//$query .= " ;";
-				//echo $query;
-				//$result = $db->query($query);	
+				}				
 			}
 			
 		}

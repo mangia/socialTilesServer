@@ -72,6 +72,11 @@
 		$result = $db->query($query);
 		$row = $result->fetch(PDO::FETCH_ASSOC);	
 		
+		if($row['type_of_participants'] == 0){
+			$query = $query = "INSERT INTO event_participants(event, participant, status) VALUES  ( ".$row[Tags::$event_id].", ". $creator.", 0 ),";	;
+			$result = $db->query($query);		
+		}		
+		
 		echo json_encode($row);
 		
 	}
