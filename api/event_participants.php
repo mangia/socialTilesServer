@@ -127,12 +127,15 @@
 				
 				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id]."),";
+					$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
+					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id].");";
+					echo $query;
+					$result = $db->query($query);	
 				}
-				$query = substr($query, 0, -1);
-				$query .= " ;";
-				echo $query;
-				$result = $db->query($query);	
+				//$query = substr($query, 0, -1);
+				//$query .= " ;";
+				//echo $query;
+				//$result = $db->query($query);	
 			}
 			
 		}
