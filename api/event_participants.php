@@ -122,7 +122,7 @@
 					$query .=	"gm.group_id =".$participants[$i]." "; 					
 				}		
 				$query .= ";";
-				//echo $query;
+				echo $query;
 				$result = $db->query($query);	
 				
 				//$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
