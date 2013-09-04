@@ -95,7 +95,8 @@ CREATE TABLE IF NOT EXISTS posts(
 
 CREATE TABLE IF NOT EXISTS goals(
 	goal_id        SERIAL PRIMARY KEY,
-	name           VarCHAR(20) NOT NULL,
+	name           VARCHAR(20) NOT NULL,
+	game_name      VarCHAR(25) NOT NULL,
 	goal_type      integer NOT NULL, -- 0: get score for a specific game, play for a specific time, get score for all games
 	threshold      integer NOT NULL,
 	reward_points  integer NOT NULL,

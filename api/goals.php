@@ -28,6 +28,7 @@ if ($app -> request() -> isGet()) {
 if ($app -> request() -> isPost()) {
 
     $name = $app -> request() -> post('name');
+    $game_name = $app->request()->post('game_name');
     $goal_type = $app -> request() -> post('goal_type');
     $threshold = $app -> request() -> post('threshold');
     $reward_points = $app -> request() -> post('reward_points');
@@ -38,8 +39,9 @@ if ($app -> request() -> isPost()) {
 
     if ($app -> request() -> post(Tags::$op) == "single")  {
         $created_for = $app -> request() -> post('creator');
-        $query = "INSERT INTO goals (name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   SELECT " 
-        ." ". $name ."," 
+        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   SELECT " 
+        ." '". $name ."'," 
+        ." '".$game_name."',"
         ." ". $goal_type ."," 
         . " ". $threshold ."," 
         ." ". $reward_points .", " 
@@ -60,13 +62,14 @@ if ($app -> request() -> isPost()) {
      } else if ($app -> request() -> post(Tags::$op) == "multiple") {
         $created_for_multi = $app->request()->post('created_for_multi');
         $created_for_array = json_decode($created_for_multi);
-        $query = "INSERT INTO goals (name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
+        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
         foreach ($created_for_array  as $i => $value) {
-            $query .= "( ". $name ."," 
+            $query .= "('". $name ."',"
+            ."'".$game_name."'," 
             ." ". $goal_type ."," 
             . " ". $threshold ."," 
             ." ". $reward_points .", " 
-            ." ". $created_for ."," 
+            ." ". $created_for_array[$i] ."," 
             ." ". $achieved_by ."'" 
             ." '". $start_date ."'," 
             ." '". $end_date ."'," 
