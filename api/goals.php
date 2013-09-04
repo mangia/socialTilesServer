@@ -51,7 +51,7 @@ if ($app -> request() -> isPost()) {
         ." '". $end_date ."'," 
         ." '". $date ."';";
 
-        //echo "querry is: ".$query;
+        echo "querry is: ".$query;
         $result = $db -> query($query);
 
         $query = "SELECT *  FROM goals ORDER BY goal_id desc limit 1 ; ";
@@ -78,7 +78,7 @@ if ($app -> request() -> isPost()) {
         }
         $query = substr($query, 0, -1);
         $query .= " ;";
-         //echo $query;
+         echo $query;
         $result = $db->query($query);
     }
 
