@@ -19,7 +19,7 @@
 		if($app->request()->get(Tags::$op) == "user_events"){
 			$user_id = 	 $app->request()->get(Tags::$user_id);	
 
-			$query = "SELECT e.creator, e.name,e.type_of_participants, e.date_created ,e.start_date,e.end_date,e.reward_text,e.reward_points  ".
+			$query = "SELECT e.event_id, e.entity ,e.creator, e.name,e.type_of_participants, e.date_created ,e.start_date,e.end_date,e.reward_text,e.reward_points  ".
 			"  FROM event_participants ep, events e WHERE  ep.participant =".$user_id." AND ep.event = e.event_id ;";
 			//echo $query;			
 			$result = $db->query($query);
