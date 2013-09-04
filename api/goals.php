@@ -47,10 +47,10 @@ if ($app -> request() -> isPost()) {
         ." '". $name ."'," 
         ." '".$game_name."',"
         ." ". $goal_type ."," 
-        . " ". $threshold ."," 
+        ." ". $threshold ."," 
         ." ". $reward_points .", " 
         ." ". $created_for ."," 
-        ." ". $achieved_by ."'" 
+        ." ". $achieved_by ."," 
         ." '". $start_date ."'," 
         ." '". $end_date ."'," 
         ." '". $date ."' );";
