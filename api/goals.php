@@ -26,36 +26,26 @@ if ($app -> request() -> isGet()) {
     }
 }
 if ($app -> request() -> isPost()) {
-    
+
     $name = $app -> request() -> post('name');
-    $game_name = $app->request()->post('game_name');
+    $game_name = $app -> request() -> post('game_name');
     $goal_type = $app -> request() -> post('goal_type');
     $threshold = $app -> request() -> post('threshold');
     $reward_points = $app -> request() -> post('reward_points');
     $created_for = $app -> request() -> post('created_for');
-   
+
     $start_date = $app -> request() -> post('start_date');
     $end_date = $app -> request() -> post('end_date');
     $date = $app -> request() -> post('date_created');
-    
+
     //echo "post vars are :";
     //var_dump($app->request()->post());
-    
-    if ($app -> request() -> post(Tags::$op) == "single")  {
-         $achieved_by = $app -> request() -> post('achieved_by');
-        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES ( " 
-        ." '". $name ."'," 
-        ." '".$game_name."',"
-        ." ". $goal_type ."," 
-        ." ". $threshold ."," 
-        ." ". $reward_points .", " 
-        ." ". $created_for ."," 
-        ." ". $achieved_by ."," 
-        ." '". $start_date ."'," 
-        ." '". $end_date ."'," 
-        ." '". $date ."' );";
 
-        echo "querry is: ".$query;
+    if ($app -> request() -> post(Tags::$op) == "single") {
+        $achieved_by = $app -> request() -> post('achieved_by');
+        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES ( " . " '" . $name . "'," . " '" . $game_name . "'," . " " . $goal_type . "," . " " . $threshold . "," . " " . $reward_points . ", " . " " . $created_for . "," . " " . $achieved_by . "," . " '" . $start_date . "'," . " '" . $end_date . "'," . " '" . $date . "' );";
+
+        echo "querry is: " . $query;
         $result = $db -> query($query);
 
         $query = "SELECT *  FROM goals ORDER BY goal_id desc limit 1 ; ";
@@ -63,44 +53,35 @@ if ($app -> request() -> isPost()) {
         $row = $result -> fetchAll(PDO::FETCH_ASSOC);
 
         echo json_encode($row);
-     } else if ($app -> request() -> post(Tags::$op) == "multiple") {
-                
-        $query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
+    } else if ($app -> request() -> post(Tags::$op) == "multiple") {
+
+        $query = "SELECT * from groups g, group_members gm WHERE g.entity=" . $created_for . " AND g.group_id = gm.group_id";
         echo $query;
-        
-        $result = $db->query($query);
+
+        $result = $db -> query($query);
         $achieved_by_array = array();
         echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
-        
-        while($row = $result->fetch(PDO::FETCH_ASSOC)){
-           // echo "HIIII";
-            //echo $row;
-           // echo "HOLA";
-           // echo $row[Tags::$user_id];
+
+        while ($row = $result -> fetch(PDO::FETCH_ASSOC)) {
+            echo "HIIII";
+            echo $row;
+            echo "HOLA";
+            echo $row[Tags::$user_id];
             $achieved_by_array[] = $row[Tags::$user_id];
         }
-        
-       // echo json_encode($achieved_by_array);
-        
+
+        // echo json_encode($achieved_by_array);
+
         $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
-        foreach ($achieved_by_array  as $achieved_by) {
-            $query .= "('". $name ."',"
-            ."'".$game_name."'," 
-            ." ". $goal_type ."," 
-            . " ". $threshold ."," 
-            ." ". $reward_points .", " 
-            ." ". $created_for ."," 
-            ." ". $achieved_by ."," 
-            ." '". $start_date ."'," 
-            ." '". $end_date ."'," 
-            ." '". $date ."'),";
-            
+        foreach ($achieved_by_array as $achieved_by) {
+            $query .= "('" . $name . "'," . "'" . $game_name . "'," . " " . $goal_type . "," . " " . $threshold . "," . " " . $reward_points . ", " . " " . $created_for . "," . " " . $achieved_by . "," . " '" . $start_date . "'," . " '" . $end_date . "'," . " '" . $date . "'),";
+
         }
         $query = substr($query, 0, -1);
         $query .= " ;";
-         echo $query;
-        $result = $db->query($query);
-        
+        echo $query;
+        $result = $db -> query($query);
+
         echo "Everythins is ok. Chillax";
     }
 
