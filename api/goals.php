@@ -100,6 +100,8 @@ if ($app -> request() -> isPost()) {
         $query .= " ;";
         // echo $query;
         $result = $db->query($query);
+        
+        echo "Everythins is ok. Chillax";
     }
 
 }
