@@ -38,8 +38,8 @@ if ($app -> request() -> isPost()) {
     $end_date = $app -> request() -> post('end_date');
     $date = $app -> request() -> post('date_created');
     
-    echo "post vars are :";
-    var_dump($app->request()->post());
+    //echo "post vars are :";
+    //var_dump($app->request()->post());
     
     if ($app -> request() -> post(Tags::$op) == "single")  {
          $achieved_by = $app -> request() -> post('achieved_by');
@@ -66,6 +66,8 @@ if ($app -> request() -> isPost()) {
      } else if ($app -> request() -> post(Tags::$op) == "multiple") {
                 
         $query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
+        echo $query;
+        
         $result = $db->query($query);
         $achieved_by_array = array();
         echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
