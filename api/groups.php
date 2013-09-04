@@ -20,7 +20,7 @@
 		
 		if($app->request()->get(Tags::$op) == "user_groups"){
 			$user = 	$app->request()->get(Tags::$user_id);		
-			$query = "SELECT *  FROM group_members WHERE  user_id =".$user."; "	;
+			$query = "SELECT g.group_id, g.date_created, g.name, g.description,g.creator, g.entity as entity, u.user_id ,u.name_first,u.name_last ,u.fbid  FROM group_members WHERE  user_id =".$user."; "	;
 			$result = $db->query($query);
 			
 			$query = "SELECT DISTINCT ON (g.group_id) * from groups g, users u WHERE ";
