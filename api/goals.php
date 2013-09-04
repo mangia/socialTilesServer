@@ -65,14 +65,18 @@ if ($app -> request() -> isPost()) {
         echo json_encode($row);
      } else if ($app -> request() -> post(Tags::$op) == "multiple") {
                 
-        $query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
-        echo $query;
+        //$query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
+       // echo $query;
         
         $result = $db->query($query);
         $achieved_by_array = array();
-        echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+        //echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
         
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
+            echo "HIIII";
+            echo $row;
+            echo "HOLA";
+            echo $row[Tags::$user_id];
             $achieved_by_array[] = $row[Tags::$user_id];
         }
         
