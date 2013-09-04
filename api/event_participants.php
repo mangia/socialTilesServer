@@ -133,7 +133,7 @@
 					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id].");";
 					echo "query is: ";					
 					echo $query;
-					$result = $db->query($query);	
+					$result1 = $db->query($query);	
 				}
 				//$query = substr($query, 0, -1);
 				//$query .= " ;";
