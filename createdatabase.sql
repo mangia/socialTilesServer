@@ -93,16 +93,19 @@ CREATE TABLE IF NOT EXISTS posts(
 	post_text  VARCHAR(250) NOT NULL
 );
 
-CREATe TABLE IF NOT EXISTS goals(
-	goal_id      SERIAL PRIMARY KEY,
-	goal_name    VarCHAR(20) NOT NULL,
-	game_name    VARCHAR(25) NOT NULL,
-	goal_type    integer NOT NULL, 
-	threshold    integer NOT NULL,
-	reward       integer NOT NULL,
-	created_for  integer NOT NULL REFERENCES entities,
-	achieved_by  integer NOT NULL REFERENCES users(user_id),
-	currently    integer NOT NULL DEFAULT 0
+CREATE TABLE IF NOT EXISTS goals(
+	goal_id        SERIAL PRIMARY KEY,
+	name           VarCHAR(20) NOT NULL,
+	goal_type      integer NOT NULL, -- 0: get score for a specific game, play for a specific time, get score for all games
+	threshold      integer NOT NULL,
+	reward_points  integer NOT NULL,
+	created_for    integer NOT NULL REFERENCES entities,
+	achieved_by    integer NOT NULL REFERENCES users(user_id),
+	currently      integer NOT NULL DEFAULT 0,
+	is_finished    integer NOT NULL DEFAULT 0, -- 0 : not finished, 1:finished
+	start_date     DATE NOT NULL,
+	end_date       DATE NOT NULL,
+	date_created   DATE NOT NULL default now()
 );
 
 
