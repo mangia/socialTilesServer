@@ -60,7 +60,7 @@ if ($app -> request() -> isPost()) {
 
         $result = $db -> query($query);
         $achieved_by_array = array();
-        echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+        //echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
 
         while ($row = $result -> fetch(PDO::FETCH_ASSOC)) {
             echo "HIIII";
