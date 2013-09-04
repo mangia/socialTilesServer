@@ -106,7 +106,7 @@
 				}
 				$query = substr($query, 0, -1);
 				$query .= " ;";
-				echo $query;
+				//echo $query;
 				$result = $db->query($query);	
 			}
 			else{
@@ -122,10 +122,10 @@
 					$query .=	"gm.group_id =".$participants[$i]." "; 					
 				}		
 				$query .= ";";
-				echo $query;
+				//echo $query;
 				$result = $db->query($query);	
 				
-				$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
+				//$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 					$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 					$query .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id].");";
