@@ -73,14 +73,14 @@ if ($app -> request() -> isPost()) {
         //echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
         
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
-            echo "HIIII";
-            echo $row;
-            echo "HOLA";
-            echo $row[Tags::$user_id];
+           // echo "HIIII";
+            //echo $row;
+           // echo "HOLA";
+           // echo $row[Tags::$user_id];
             $achieved_by_array[] = $row[Tags::$user_id];
         }
         
-        echo json_encode($achieved_by_array);
+       // echo json_encode($achieved_by_array);
         
         $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
         foreach ($achieved_by_array  as $achieved_by) {
@@ -98,7 +98,7 @@ if ($app -> request() -> isPost()) {
         }
         $query = substr($query, 0, -1);
         $query .= " ;";
-         echo $query;
+        // echo $query;
         $result = $db->query($query);
     }
 
