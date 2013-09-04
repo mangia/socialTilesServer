@@ -125,21 +125,19 @@
 				//echo $query;
 				$result = $db->query($query);	
 				
-				//echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
-				$rows  = $result->fetchAll(PDO::FETCH_ASSOC);
-				var_dump($rows);
-				//echo "rows are: ";
-				//echo $rows;
 				//$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
+				$queries = array();
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 					$query1 = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 					$query1 .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id].");";
 					
 					echo "query is: ";					
 					echo $query1;
-
-					$result1 = $db->query($query1);	
+					$queries[] = $query1; 
+					//$result1 = $db->query($query1);	
 				}
+			
+				var_dump($queries);
 				//$query = substr($query, 0, -1);
 				//$query .= " ;";
 				//echo $query;
