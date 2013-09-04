@@ -43,7 +43,7 @@
 		}
 		else if ($app->request()->get(Tags::$op) == "group_info"){
 			$group = 	$app->request()->get(Tags::$group_id);		
-			$query = "SELECT g.group_id, g.date_created, g.name, g.description,g.creator, g.entity, u.user_id ,u.name_first,u.name_last ,u.fbid ,u.total_score,u.total_duration  ,u.num_achievments ,u.entity as user_entity  FROM groups g, users u WHERE  g.group_id =".$group." AND u.user_id = g.creator; "	;
+			$query = "SELECT g.group_id, g.date_created, g.name, g.description,g.creator, g.entity, u.user_id ,u.name_first,u.name_last ,u.fbid ,u.total_score,u.total_duration  ,u.num_achievments  FROM groups g, users u WHERE  g.group_id =".$group." AND u.user_id = g.creator; "	;
 			$result = $db->query($query);	
 			$group_info = $result->fetch(PDO::FETCH_ASSOC);
 			
