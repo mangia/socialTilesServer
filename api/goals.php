@@ -43,7 +43,7 @@ if ($app -> request() -> isPost()) {
     
     if ($app -> request() -> post(Tags::$op) == "single")  {
          $achieved_by = $app -> request() -> post('achieved_by');
-        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   SELECT " 
+        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES () " 
         ." '". $name ."'," 
         ." '".$game_name."',"
         ." ". $goal_type ."," 
@@ -53,14 +53,14 @@ if ($app -> request() -> isPost()) {
         ." ". $achieved_by ."'" 
         ." '". $start_date ."'," 
         ." '". $end_date ."'," 
-        ." '". $date ."';";
+        ." '". $date ."');";
 
         echo "querry is: ".$query;
         $result = $db -> query($query);
 
         $query = "SELECT *  FROM goals ORDER BY goal_id desc limit 1 ; ";
         $result = $db -> query($query);
-        $row = $result -> fetch(PDO::FETCH_ASSOC);
+        $row = $result -> fetchAll(PDO::FETCH_ASSOC);
 
         echo json_encode($row);
      } else if ($app -> request() -> post(Tags::$op) == "multiple") {
