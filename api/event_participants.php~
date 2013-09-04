@@ -140,7 +140,7 @@
 				var_dump($queries);
 				$i = 0;
 				foreach($queries as $q)	{
-					echo $q
+					echo $q;
 					$result = $db->query($q);				
 				}			
 				
