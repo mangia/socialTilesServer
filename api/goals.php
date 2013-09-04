@@ -65,7 +65,7 @@ if ($app -> request() -> isPost()) {
         echo json_encode($row);
      } else if ($app -> request() -> post(Tags::$op) == "multiple") {
                 
-        //$query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
+        $query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
        // echo $query;
         
         $result = $db->query($query);
