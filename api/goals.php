@@ -39,7 +39,7 @@ if ($app -> request() -> isPost()) {
     $date = $app -> request() -> post('date_created');
     
     echo "post vars are :";
-    echo  $app->request()->post();
+    var_dump($app->request()->post());
     
     if ($app -> request() -> post(Tags::$op) == "single")  {
          $achieved_by = $app -> request() -> post('achieved_by');
@@ -68,9 +68,13 @@ if ($app -> request() -> isPost()) {
         $query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
         $result = $db->query($query);
         $achieved_by_array = array();
+        echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+        
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $achieved_by_array[] = $row[Tags::$user_id];
         }
+        
+        echo json_encode($achieved_by_array);
         
         $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
         foreach ($achieved_by_array  as $achieved_by) {
@@ -80,7 +84,7 @@ if ($app -> request() -> isPost()) {
             . " ". $threshold ."," 
             ." ". $reward_points .", " 
             ." ". $created_for ."," 
-            ." ". $achieved_by ."'" 
+            ." ". $achieved_by ."," 
             ." '". $start_date ."'," 
             ." '". $end_date ."'," 
             ." '". $date ."'),";
