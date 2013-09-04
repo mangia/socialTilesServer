@@ -36,9 +36,12 @@ if ($app -> request() -> isPost()) {
     $start_date = $app -> request() -> post('start_date');
     $end_date = $app -> request() -> post('end_date');
     $date = $app -> request() -> post('date_created');
-
+    
+    echo "post vars are :";
+    echo $app->request()->post();
+    
     if ($app -> request() -> post(Tags::$op) == "single")  {
-        $created_for = $app -> request() -> post('creator');
+        $created_for = $app -> request() -> post('created_for');
         $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   SELECT " 
         ." '". $name ."'," 
         ." '".$game_name."',"
