@@ -125,7 +125,7 @@
 				//echo $query;
 				$result = $db->query($query);	
 				
-				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
+				//echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
 				
 				//$query = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
