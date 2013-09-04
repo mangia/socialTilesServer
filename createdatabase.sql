@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS feedback (
 	feedback_id  SERIAL PRIMARY KEY,
 	user_id      integer NOT NULL REFERENCES users(user_id),
-	datestamp    DATE default now(),
+	date_created DATE default now(),
 	gamename     VARCHAR(25) NOT NULL,
 	points       integer NOT NULL,
 	miss         integer NOT NULL, 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS goals(
 	goal_id        SERIAL PRIMARY KEY,
 	name           VARCHAR(20) NOT NULL,
 	game_name      VarCHAR(25) NOT NULL,
-	goal_type      integer NOT NULL, -- 0: get score for a specific game, play for a specific time, get score for all games
+	goal_type      integer NOT NULL, -- 0: get score for a specific game, 1: play for a specific time, 2:get score for all games
 	threshold      integer NOT NULL,
 	reward_points  integer NOT NULL,
 	created_for    integer NOT NULL REFERENCES entities,

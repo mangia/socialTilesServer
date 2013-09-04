@@ -13,7 +13,7 @@ if ($app -> request() -> isGet()) {
     if ($app -> request() -> get(Tags::$op) == "created_for") {
         $entity = $app -> request() -> get(Tags::$entity);
 
-        $query = "SELECT *  " . "  FROM goals WHERE  created_for =" . $entity . " ;";
+        $query = "SELECT *  " . "  FROM goals g, users u WHERE  g.created_for =" . $entity . " AND g.achieved_by = u.user_id ;";
         //echo $query;
         $result = $db -> query($query);
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
@@ -26,22 +26,23 @@ if ($app -> request() -> isGet()) {
     }
 }
 if ($app -> request() -> isPost()) {
-
+    
     $name = $app -> request() -> post('name');
     $game_name = $app->request()->post('game_name');
     $goal_type = $app -> request() -> post('goal_type');
     $threshold = $app -> request() -> post('threshold');
     $reward_points = $app -> request() -> post('reward_points');
-    $achieved_by = $app -> request() -> post('achieved_by');
+    $created_for = $app -> request() -> post('created_for');
+   
     $start_date = $app -> request() -> post('start_date');
     $end_date = $app -> request() -> post('end_date');
     $date = $app -> request() -> post('date_created');
     
     echo "post vars are :";
-    echo $app->request()->post();
+    echo  $app->request()->post();
     
     if ($app -> request() -> post(Tags::$op) == "single")  {
-        $created_for = $app -> request() -> post('created_for');
+         $achieved_by = $app -> request() -> post('achieved_by');
         $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   SELECT " 
         ." '". $name ."'," 
         ." '".$game_name."',"
@@ -63,16 +64,22 @@ if ($app -> request() -> isPost()) {
 
         echo json_encode($row);
      } else if ($app -> request() -> post(Tags::$op) == "multiple") {
-        $created_for_multi = $app->request()->post('created_for_multi');
-        $created_for_array = json_decode($created_for_multi);
+                
+        $query = "SELECT * from groups g, group_members gm WHERE g.entity=".$created_for." AND g.group_id = gm.group_id";
+        $result = $db->query($query);
+        $achieved_by_array = array();
+        while($row = $result->fetch(PDO::FETCH_ASSOC)){
+            $achieved_by_array[] = $row[Tags::$user_id];
+        }
+        
         $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
-        foreach ($created_for_array  as $i => $value) {
+        foreach ($achieved_by_array  as $achieved_by) {
             $query .= "('". $name ."',"
             ."'".$game_name."'," 
             ." ". $goal_type ."," 
             . " ". $threshold ."," 
             ." ". $reward_points .", " 
-            ." ". $created_for_array[$i] ."," 
+            ." ". $created_for ."," 
             ." ". $achieved_by ."'" 
             ." '". $start_date ."'," 
             ." '". $end_date ."'," 
