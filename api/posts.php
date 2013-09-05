@@ -37,7 +37,8 @@ if ($app -> request() -> isGet()) {
         while ($row = $result -> fetch(PDO::FETCH_ASSOC)) {
             $user_ids[] = $row['to_user'];
         }
-
+        $user_ids[] = $user_id;
+        
         $query = "SELECT *  FROM friends  WHERE to_user='" . $user_id . "' AND status = 1";
         $result = $db -> query($query);
         while ($row = $result -> fetch(PDO::FETCH_ASSOC)) {
