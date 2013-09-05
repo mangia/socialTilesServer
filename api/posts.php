@@ -32,7 +32,7 @@ if ($app -> request() -> isGet()) {
         $user_ids = array();
 
         $query = "SELECT *  FROM friends  WHERE from_user=" . $user_id . " AND status = 1";
-        echo $query;
+        //echo $query;
         $result = $db -> query($query);
         while ($row = $result -> fetch(PDO::FETCH_ASSOC)) {
             $user_ids[] = $row['to_user'];
@@ -57,7 +57,7 @@ if ($app -> request() -> isGet()) {
             $query.= "(p.posted_to = u.entity AND p.creator = u.user_id AND u.user_id =".$user_ids[$i]." )";
         }
         $query .= "ORDER BY post_date desc limit 40 ;";
-        echo $query;
+        //echo $query;
         $result = $db -> query($query);
         
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
