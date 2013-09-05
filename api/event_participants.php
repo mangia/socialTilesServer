@@ -53,6 +53,9 @@
 			
 	}
 	if($app->request()->isPost()){
+	    
+        $user_ids = array();
+        
 		if($app->request()->post(Tags::$op) == "single"){
 			$participant  	= $app->request()->post('participant');
 			$event	= $app->request()->post(Tags::$event_id );	
@@ -142,6 +145,20 @@
 			}
 			
 		}
+
+        $quesry = "SELECT * from event_participants ep, events e WHERE ep.event = e.event_id AND e.event_id =".$app->request()->post(Tags::$event_id )." ;";
+        $result = $db->query($quesry);
+        
+        $query = "INSERT INTO goals (name, game_name, goal_type, threshold, reward_points, created_for, achieved_by, start_date, end_date, date_created)   VALUES";
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+            $query .= "('".$row['name']."',"."'all',"." 2 ,"." -1 ,"." ".$row['reward_points'].", "." ".$row['entity'].","." ".$row['participant'].","." '". $row['start_date']."',"." '".$row['end_date']."',"." CURRENT_DATE),";
+
+        }
+        $query = substr($query, 0, -1);
+        $query .= " ;";
+        echo $query;
+        $result = $db -> query($query);
+        
 		echo "ok";
 	}
 
