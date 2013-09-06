@@ -74,7 +74,7 @@ if ($app -> request() -> isPost()) {
     $response_array['highscores'] = $response;
     $response_array['has_goals'] = FALSE;
 
-    $query = "SELECT * from goals WHERE achieved_by =" . $user_id . " AND CURRENT_DATE >= start_date AND CURRENT_DATE<= end_date AND is_finished = 0;";
+    $query = "SELECT * from goals WHERE achieved_by =" . $user_id . " AND now()::date >= start_date AND now()::date<= end_date AND is_finished = 0;";
     $result = $db -> query($query);
     echo $query;
     $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
@@ -114,6 +114,7 @@ if ($app -> request() -> isPost()) {
             }
 
             $query = "UPDATE goals SET highscore=" . $currently . " WHERE achieved_by ='" . $user_id . " AND is_finished = " . $is_finished . " ;";
+            echo $query;
             $result = $db -> query($query);
         }
 
