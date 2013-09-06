@@ -11,7 +11,7 @@ $db = new PDO($dsn);
 
 if ($app -> request() -> isGet()) {
     $user_id = $app -> request() -> get(Tags::$user_id);
-    $query = "SELECT * FROM feedback f WHERE user_id=" . $user_id . " ORDER BY date DESC ";
+    $query = "SELECT * FROM feedback  WHERE user_id=" . $user_id . " ORDER BY date_created DESC ";
     $result = $db -> query($query);
     echo $query ;
     echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
@@ -29,7 +29,9 @@ if ($app -> request() -> isPost()) {
     $level = $app -> request() -> post('level');
     $size = $app -> request() -> post('size');
     $score = $app -> request() -> post('score');
-
+    
+    $response_array = array();
+    
     //echo "Received post request";
 
     $query = "INSERT INTO feedback (user_id, gamename, date_created, points, miss, duration, winner, level, size, score) SELECT " 
@@ -39,7 +41,11 @@ if ($app -> request() -> isPost()) {
     //echo "querry is: ".$query;
     $result = $db -> query($query);
     //echo "Result is: ".$result;
-
+    
+    $query = "SELECT *  FROM feedback ORDER BY feedback_id desc limit 1 ; "  ;
+    $result = $db->query($query);
+    $response_array['feedback'] = $result->fetch(PDO::FETCH_ASSOC);    
+    
     $query = "UPDATE users SET total_score = total_score +" . $score . " ,total_duration = total_duration+" . $duration . " WHERE user_id='" . $user_id . "'";
     //echo "querry is: ".$query;
     $result = $db -> query($query);
@@ -66,7 +72,7 @@ if ($app -> request() -> isPost()) {
         $result = $db -> query($query);
         $response = "newEntry";
     }
-    $response_array = array();
+    
     $goals_array = array();
     $response_array['highscores'] = $response;
     $response_array['has_goals'] = FALSE;
