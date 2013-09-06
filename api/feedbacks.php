@@ -81,7 +81,7 @@ if ($app -> request() -> isPost()) {
     echo json_encode($rows);
     foreach ($rows as $row) {
         echo "I am in the goals loop";
-        
+        $goal_id   = $row['goal_id'];
         $goal_type = $row['goal_type'];
         $threshold = $row['threshold'];
         $currently = $row['currently'];
@@ -113,7 +113,7 @@ if ($app -> request() -> isPost()) {
                 $goals_array[] = $row;
             }
 
-            $query = "UPDATE goals SET currently =" . $currently . " WHERE achieved_by =" . $user_id . " AND is_finished = " . $is_finished . " ;";
+            $query = "UPDATE goals SET currently =" . $currently . ", is_finished = " . $is_finished . " WHERE achieved_by =" . $user_id . " AND goal_id  =".$goal_id."" ;";
             echo $query;
             $result = $db -> query($query);
         }
