@@ -36,18 +36,18 @@ if ($app -> request() -> isPost()) {
         .$user_id." ,'".$gamename."','".$date."',".$points."," 
         .$miss.",".$duration.",".$winner.",".$level.",".$size.","
         .$score ." WHERE exists( SELECT * FROM users s WHERE s.user_id='".$user_id."');";
-    //echo "querry is: ".$query;
+    echo "querry is: ".$query;
     $result = $db -> query($query);
     //echo "Result is: ".$result;
 
     $query = "UPDATE users SET total_score = total_score +" . $score . " ,total_duration = total_duration+" . $duration . " WHERE user_id='" . $user_id . "'";
-    //echo "querry is: ".$query;
+    echo "querry is: ".$query;
     $result = $db -> query($query);
 
     $response = "";
 
     $query = "SELECT h.highscore FROM highscores h WHERE h.user_id = '" . $user_id . "' AND h.gamename = '" . $gamename . "';";
-    //echo "querry is: ".$query;
+    echo "querry is: ".$query;
     $result = $db -> query($query);
 
     if ($result -> rowCount() > 0) {
@@ -73,6 +73,7 @@ if ($app -> request() -> isPost()) {
 
     $query = "SELECT * from goals WHERE achieved_by =" . $user_id . " AND CURRENT_DATE >= start_date AND CURRENT_DATE<= end_date AND is_finished = 0;";
     $result = $db -> query($query);
+    echo $query
     $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($rows as $row) {
