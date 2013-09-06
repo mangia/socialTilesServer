@@ -76,10 +76,12 @@ if ($app -> request() -> isPost()) {
 
     $query = "SELECT * from goals WHERE achieved_by =" . $user_id . " AND CURRENT_DATE >= start_date AND CURRENT_DATE<= end_date AND is_finished = 0;";
     $result = $db -> query($query);
-    //echo $query;
+    echo $query;
     $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
-
+    echo json_encode($rows);
     foreach ($rows as $row) {
+        echo "I am in the goals loop";
+        
         $goal_type = $row['goal_type'];
         $threshold = $row['threshold'];
         $currently = $row['currently'];
