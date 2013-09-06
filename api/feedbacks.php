@@ -32,7 +32,10 @@ if ($app -> request() -> isPost()) {
 
     //echo "Received post request";
 
-    $query = "INSERT INTO feedback (user_id, gamename, date_created, points, miss, duration, winner, level, size, score) SELECT '" . $user_id . "','" . $gamename . "','" . $date . "'," . $points . "," . $miss . "," . $duration . "," . $winner . "," . $level . "," . $size . "," . $score . " WHERE exists( SELECT * FROM users s WHERE s.user_id='" . $user_id . "');";
+    $query = "INSERT INTO feedback (user_id, gamename, date_created, points, miss, duration, winner, level, size, score) SELECT " 
+        .$user_id." ,'".$gamename."','".$date."',".$points."," 
+        .$miss.",".$duration.",".$winner.",".$level.",".$size.","
+        .$score ." WHERE exists( SELECT * FROM users s WHERE s.user_id='".$user_id."');";
     //echo "querry is: ".$query;
     $result = $db -> query($query);
     //echo "Result is: ".$result;
