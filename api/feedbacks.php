@@ -60,7 +60,7 @@ if ($app -> request() -> isPost()) {
         $row = $result -> fetch(PDO::FETCH_ASSOC);
         $highscore = $row['highscore'];
         if ($highscore < $score) {
-            $query = "UPDATE highscores SET highscore=" . $score . " WHERE user_id='" . $user_id . "' AND gamename = '" . $gamename . "' ;";
+            $query = "UPDATE highscores SET highscore=" . $score . " WHERE user_id='" . $user_id . "' AND gamename LIKE '" . $gamename . "' ;";
             //echo "querry is: ".$query;
             $result = $db -> query($query);
             $response = "newHighscore";
@@ -86,10 +86,14 @@ if ($app -> request() -> isPost()) {
         $goal_type = $row['goal_type'];
         $threshold = $row['threshold'];
         $currently = $row['currently'];
+        $goal_gamename = $row['game_name'];
+        $is_finished = $row['is_finished'] ;
         $is_finished = 0;
         if ($goal_type == 2) {
             $currently = $currently + $score;
-        } else {// event
+            $query = "UPDATE goals SET highscore=" .  $currently . " WHERE achieved_by ='".$user_id." ;";
+            $result = $db -> query($query);
+        } else if($gamename == $goal_gamename){// event
 
             if ($goal_type == 0) {// gather score
                 $currently = $currently + $score;
@@ -103,6 +107,8 @@ if ($app -> request() -> isPost()) {
                 $row['is_finished'] = 1;
                 $goals_array[] = $row;
             }
+            
+            $query = "UPDATE goals SET highscore=" .  $currently . " WHERE achieved_by ='".$user_id." AND is_finished = ".$is_finished." ;";
         }
 
     }
