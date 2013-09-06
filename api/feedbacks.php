@@ -113,7 +113,7 @@ if ($app -> request() -> isPost()) {
                 $goals_array[] = $row;
             }
 
-            $query = "UPDATE goals SET highscore=" . $currently . " WHERE achieved_by ='" . $user_id . " AND is_finished = " . $is_finished . " ;";
+            $query = "UPDATE goals SET currently =" . $currently . " WHERE achieved_by =" . $user_id . " AND is_finished = " . $is_finished . " ;";
             echo $query;
             $result = $db -> query($query);
         }
