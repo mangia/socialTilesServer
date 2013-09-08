@@ -158,7 +158,7 @@
         }
         $query = substr($query, 0, -1);
         $query .= " ;";
-        echo $query;
+        //echo $query;
         $result = $db -> query($query);
         
 		$response = array('response' => 'ok');
