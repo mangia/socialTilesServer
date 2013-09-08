@@ -26,7 +26,7 @@ if ($app -> request() -> isGet()) {
         $user_ids[] = $row['from_user'];
     }
 
-    if (sizeof($user_ids) > 1) {
+    if (sizeof($user_ids) > 0) {
 
         $query = "SELECT *  FROM users  WHERE ";
         $flag = true;
