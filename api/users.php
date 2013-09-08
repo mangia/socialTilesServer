@@ -32,7 +32,7 @@ if ($app -> request() -> isGet()) {
             
             $query .= " name_first LIKE '" . $entry . "' OR name_last LIKE '" . $entry . "' ";
         }
-        echo $query;
+        //echo $query;
         echo json_encode($search_entries);
         $result = $db -> query($query);
         $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
