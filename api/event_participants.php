@@ -161,7 +161,8 @@
         echo $query;
         $result = $db -> query($query);
         
-		echo "ok";
+		$response = array('response' => 'ok');
+        echo json_encode($response);
 	}
 
 ?>

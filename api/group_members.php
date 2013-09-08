@@ -51,7 +51,8 @@ if ($app -> request() -> isPost()) {
         }
 
     }
-    echo "ok";
+     $response = array('response' => 'ok');
+        echo json_encode($response);
 }
 ?>
 
