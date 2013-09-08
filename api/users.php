@@ -17,21 +17,20 @@ if ($app -> request() -> isGet()) {
         $result = $db -> query($query);
         $row = $result -> fetch(PDO::FETCH_ASSOC);
         echo json_encode($row);
-    }
-    else if($option == "search"){
-        $user_id = $app->request()->get('user_id');
-        $search_entries =explode(" ", $app->request()->get('search_entry')) ;
-        
-        $query = "SELECT * FROM users WHERE user_id != ".$user_id." AND ";
-        $flag = FALSE;
+    } else if ($option == "search") {
+        $user_id = $app -> request() -> get('user_id');
+        $search_entries = explode(" ", $app -> request() -> get('search_entry'));
+
+        $query = "SELECT * FROM users WHERE user_id != " . $user_id . " AND ";
+        $flag = true;
         foreach ($search_entries as $entry) {
-            if($flag == FALSE){
-                $flage = TRUE;
+            if (!$flag) {
+                $query .= " OR ";
+            } else {
+                $flag = false;
             }
-            else{
-                $query.= " OR ";
-            }
-            $query .= " name_first LIKE '".$entry."' OR name_last LIKE '".$entry."' ";
+            
+            $query .= " name_first LIKE '" . $entry . "' OR name_last LIKE '" . $entry . "' ";
         }
         echo $query;
         echo json_encode($search_entries);
