@@ -20,7 +20,7 @@ if ($app -> request() -> isGet()) {
     }
     else if($option == "search"){
         $user_id = $app->request()->get('user_id');
-        $search_entries =explode(" ", $app->request->get('search_entry')) ;
+        $search_entries =explode(" ", $app->request()->get('search_entry')) ;
         
         $query = "SELECT * FROM users WHERE user_id != ".$user_id." AND ";
         $flag = FALSE;
