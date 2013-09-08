@@ -33,6 +33,8 @@ if ($app -> request() -> isGet()) {
             }
             $query .= " name_first is ".$entry." OR name_last is ".$entry." ";
         }
+        echo $query;
+        echo json_encode($search_entries);
         $result = $db -> query($query);
         $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($rows);
