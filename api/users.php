@@ -31,7 +31,7 @@ if ($app -> request() -> isGet()) {
             else{
                 $query.= " OR ";
             }
-            $query .= " name_first is ".$entry." OR name_last is ".$entry." ";
+            $query .= " name_first LIKE '".$entry."' OR name_last LIKE '".$entry."' ";
         }
         echo $query;
         echo json_encode($search_entries);
