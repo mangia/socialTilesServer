@@ -31,7 +31,7 @@ if ($app -> request() -> isGet()) {
             else{
                 $query.= " OR ";
             }
-            $query .= " name_first = ".$entry." OR name_last = ".$entry." ";
+            $query .= " name_first is ".$entry." OR name_last is ".$entry." ";
         }
         $result = $db -> query($query);
         $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
