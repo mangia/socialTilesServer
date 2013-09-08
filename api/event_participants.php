@@ -58,7 +58,8 @@
         
 		if($app->request()->post(Tags::$op) == "single"){
 			$participant  	= $app->request()->post('participant');
-			$event	= $app->request()->post(Tags::$event_id );	
+			$user_ids[] = $participant;
+		    $event	= $app->request()->post(Tags::$event_id );	
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
@@ -104,6 +105,7 @@
 				$query = "INSERT INTO event_participants(event, participant, status) VALUES ";
 				foreach ($participants as $i => $value){
 					//echo $participantss[$i];
+					$user_ids [] = $participants[$i];
 					$query .= " ( ".$event.", ". $participants[$i].", 0 ),";		
 					
 				}
@@ -132,7 +134,7 @@
 				while ($row = $result->fetch(PDO::FETCH_ASSOC)){
 					$query1 = "INSERT INTO event_participants (event, participant, status, group_id ) VALUES ";
 					$query1 .= "("." ".$event.", "." ".$row[Tags::$user_id].", 0, ".$row[Tags::$group_id].");";
-					
+					$user_ids = $row[Tags::$user_id] ;
 					$queries[] = $query1; 
 
 				}
