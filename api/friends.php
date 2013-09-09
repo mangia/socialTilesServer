@@ -42,23 +42,29 @@ if ($app -> request() -> isGet()) {
         $result = $db -> query($query);
 
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
-    }
-    else{
+    } else {
         $response = array('response' => 'nofriends');
         echo json_encode($response);
     }
 
 }
 if ($app -> request() -> isPost()) {
+    $op = $app -> request() -> post(Tags::$op);
     $from_user = $app -> request() -> post(Tags::$from_user);
     $to_user = $app -> request() -> post(Tags::$to_user);
+    if ($op == "add") {
 
-    $query = "INSERT INTO friends (from_user, to_user, status) VALUES (" . " " . $from_user . ", " . " " . $to_user . ", 1 );";
-    //$allPostVars = $app->request()->post();
-    //echo json_encode($allPostVars);
-    $result = $db -> query($query);
+        $query = "INSERT INTO friends (from_user, to_user, status) VALUES (" . " " . $from_user . ", " . " " . $to_user . ", 1 );";
+
+        $result = $db -> query($query);
+    } else {
+        $query = "DELETE from friends WHERE from_user = " . $from_user . " AND to_user" . $to_user . " AND EXISTS(SELECT 1 WHERE from friends WHERE from_user = " . $from_user . " AND to_user" . $to_user . " )";
+        $result = $db -> query($query);
+        $query = "DELETE from friends WHERE from_user = " . $to_user . " AND to_user" . $from_user . " AND EXISTS(SELECT 1 WHERE from friends WHERE from_user = " . $to_user . " AND to_user" . $from_user . " )";
+        $result = $db -> query($query);
+    }
     $response = array('response' => 'ok');
-        echo json_encode($response);
+    echo json_encode($response);
 }
 ?>
 

@@ -29,13 +29,29 @@ if ($app -> request() -> isGet()) {
             } else {
                 $flag = false;
             }
-            
+
             $query .= " name_first LIKE '" . $entry . "' OR name_last LIKE '" . $entry . "' ";
         }
         //echo $query;
         //echo json_encode($search_entries);
         $result = $db -> query($query);
         $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row) {
+            $isfriend = "false";
+            $query = "SELECT *  FROM friends  WHERE from_user='" . $user_id . "' AND to_user = " . $row[Tags::$user_id] . "AND status = 1";
+            $result1 = $db -> query($query);
+            if ($result1 -> rowCount() > 0) {
+                $isfriend = "true";
+            } else {
+                $query = "SELECT *  FROM friends  WHERE to_user='" . $user_id . "' AND from_user = " . $row[Tags::$user_id] . "AND status = 1";
+                $result1 = $db -> query($query);
+                if ($result1 -> rowCount() > 0) {
+                    $isfriend = "true";
+                }
+            }
+            $row["isfriend"] = $isfriend;
+        }
         echo json_encode($rows);
     }
 
