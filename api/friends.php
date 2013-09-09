@@ -57,6 +57,8 @@ if ($app -> request() -> isPost()) {
     //$allPostVars = $app->request()->post();
     //echo json_encode($allPostVars);
     $result = $db -> query($query);
+    $response = array('response' => 'ok');
+        echo json_encode($response);
 }
 ?>
 
