@@ -19,7 +19,7 @@ if ($app -> request() -> isGet()) {
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
     } else if ($app -> request() -> get(Tags::$op) == "achieved_by") {
         $user_id = $app -> request() -> get(Tags::$user_id);
-        $query = "SELECT *  FROM goals, users u WHERE achieved_by=" . $user_id . " AND g.achieved_by = u.user_id ;";
+        $query = "SELECT *  FROM goals g, users u WHERE g.achieved_by=" . $user_id . " AND g.achieved_by = u.user_id ;";
         $result = $db -> query($query);
         //echo $query;
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
