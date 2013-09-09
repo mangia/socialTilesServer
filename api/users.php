@@ -36,10 +36,10 @@ if ($app -> request() -> isGet()) {
         //echo json_encode($search_entries);
         $result = $db -> query($query);
         $rows = $result -> fetchAll(PDO::FETCH_ASSOC);
-
+        $rows_final = array();
         foreach ($rows as $row) {
             $isfriend = "false";
-            echo $row;
+            //echo $row;
             $query = "SELECT *  FROM friends  WHERE from_user='" . $user_id . "' AND to_user = " . $row[Tags::$user_id] . "AND status = 1";
             $result1 = $db -> query($query);
             if ($result1 -> rowCount() > 0) {
@@ -52,9 +52,9 @@ if ($app -> request() -> isGet()) {
                 }
             }
             $row["isfriend"] = $isfriend;
-            var_dump($row);
+            $rows_final[] = $row;
         }
-        echo json_encode($rows);
+        echo json_encode($rows_final);
     }
 
 }
