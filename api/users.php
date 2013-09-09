@@ -52,7 +52,7 @@ if ($app -> request() -> isGet()) {
                 }
             }
             $row["isfriend"] = $isfriend;
-            echo $row["isfriend"];
+            var_dump($row);
         }
         echo json_encode($rows);
     }
