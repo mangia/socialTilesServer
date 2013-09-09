@@ -39,6 +39,7 @@ if ($app -> request() -> isGet()) {
 
         foreach ($rows as $row) {
             $isfriend = "false";
+            echo $row;
             $query = "SELECT *  FROM friends  WHERE from_user='" . $user_id . "' AND to_user = " . $row[Tags::$user_id] . "AND status = 1";
             $result1 = $db -> query($query);
             if ($result1 -> rowCount() > 0) {
