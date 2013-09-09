@@ -13,7 +13,7 @@ if ($app -> request() -> isGet()) {
     $user_id = $app -> request() -> get(Tags::$user_id);
     $query = "SELECT * FROM feedback  WHERE user_id=" . $user_id . " ORDER BY date_created DESC ";
     $result = $db -> query($query);
-    echo $query;
+    //echo $query;
     echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
 }
 
