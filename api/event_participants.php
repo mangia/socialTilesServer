@@ -22,7 +22,7 @@
 		$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 		$result = $db->query($query);
 		$row = $result->fetch(PDO::FETCH_ASSOC);		
-		
+		$event_entity = $row['entity'];
 		if($row['type_of_participants'] == 0){
 			if($app->request()->get(Tags::$op) == Tags::$user){
 				$query = "SELECT DISTINCT ON (u.user_id) * FROM event_participants ep, users u WHERE ep.event='".$event."' AND ep.status = 1 AND ep.participant = u.user_id";
@@ -39,7 +39,7 @@
 		else {
 			$group	= $app->request()->get(Tags::$group_id);
 			if($app->request()->get(Tags::$op) == Tags::$user){
-				$query = "SELECT * FROM event_participants ep, users u, groups g WHERE ep.event=".$event." AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id  IS NOT NULL AND ep.group_id = g.group_id ";			
+				$query = "SELECT * FROM event_participants ep, users u, groups g, goals gl WHERE ep.event=".$event." AND ep.status = 1 AND ep.participant = u.user_id AND ep.group_id  IS NOT NULL AND ep.group_id = g.group_id d  AND gl.created_for = ".$event_entity." AND gl.achieved_by = u.user_id";			
 				//echo $query;				
 				$result = $db->query($query);		
 				echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));				
