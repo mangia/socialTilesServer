@@ -95,6 +95,7 @@ if ($app -> request() -> isPost()) {
             echo "i am here in goal type 2";
             $currently = $currently + $score;
             $query = "UPDATE goals SET currently=" . $currently . " WHERE achieved_by ='" . $user_id . " ;";
+            echo $query;
             $result = $db -> query($query);
 
         } 
