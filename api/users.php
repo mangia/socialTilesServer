@@ -9,6 +9,18 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+/**
+ * get request
+ * @param  op  either info for user information or search for searching users with specific criteria 
+ * if op = info
+ *      @param fbid : the facebook id of the user
+ *      @return the information of the user
+ * else op = search
+ *      @param user_id : needed in order for the user that perform the search request to be excluded from the results
+ *      @param search_enrty : a string with all the search critirea 
+ *      @return the users that matched the critirea with an extra attribute for each returned user indicating if it is already a friend or not
+ */
+
 if ($app -> request() -> isGet()) {
     $option = $app -> request() -> get('option');
     if ($option == "info") {
@@ -58,6 +70,15 @@ if ($app -> request() -> isGet()) {
     }
 
 }
+
+/**
+ *  post request to add a new user
+ * @param fbid 
+ * @param name_first
+ * @param name_last
+ * returns the info of the new user 
+ */
+
 if ($app -> request() -> isPost()) {
 
     $fbid = $app -> request() -> post('fbid');

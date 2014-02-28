@@ -8,7 +8,15 @@ $app = new \Slim\Slim();
 
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
-
+/**
+ * @param group
+ * @param op : user 
+ * if op = user
+ *      @return the user info of the group_members
+ * else
+ *      @return the group members of the groups
+ * 
+ */
 if ($app -> request() -> isGet()) {
 
     $group = $app -> request() -> get(Tags::$group_id);
@@ -31,6 +39,18 @@ if ($app -> request() -> isGet()) {
     }
 
 }
+
+/**
+ * @param op : single (for one user), multiple (for may users )
+ * if op = single
+ *      @param user_id
+ *      @param group_id
+ *      inserts a single user in a group
+ * else op = multiple
+ *      @param user_ids : the list of user ids
+ *      @param gruop_id : 
+ */
+
 if ($app -> request() -> isPost()) {
     if ($app -> request() -> post(Tags::$op) == "single") {
         $user = $app -> request() -> post(Tags::$user_id);

@@ -9,6 +9,14 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+/**
+ * @param op : created_for (if it a goal for a group, a single user or if it is an event) achieved_by ( which user should acieve this goal) 
+ * if op = created for
+ *      @return the goals created for the entity
+ * if op = achieved_by
+ *      @return the user's goal      
+ */
+
 if ($app -> request() -> isGet()) {
     if ($app -> request() -> get(Tags::$op) == "created_for") {
         $entity = $app -> request() -> get(Tags::$entity);
@@ -25,6 +33,26 @@ if ($app -> request() -> isGet()) {
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
     }
 }
+
+/**
+ * @param name
+ * @param gmae_name
+ * @param goal_type
+ * @param threshold
+ * @param reward_points
+ * @param created_for
+ * @param start_date
+ * @param end_date
+ * @param date_created
+ * 
+ * @param  op : single or multiple
+ * if op  = single
+ *      @param achieved_by
+ *      inserts the goal for a single user
+ * if op = multiple
+ *  inserts goal to all the groupmembers of a group
+ */
+
 if ($app -> request() -> isPost()) {
 
     $name = $app -> request() -> post('name');

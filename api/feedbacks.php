@@ -9,6 +9,11 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+/**
+ * get request
+ * @param user_id
+ * @return all the feedbacks for this user
+ */
 if ($app -> request() -> isGet()) {
     $user_id = $app -> request() -> get(Tags::$user_id);
     $query = "SELECT * FROM feedback  WHERE user_id=" . $user_id . " ORDER BY date_created DESC ";
@@ -16,6 +21,22 @@ if ($app -> request() -> isGet()) {
     //echo $query;
     echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
 }
+
+/**
+ * adds the new feedback and makes sure to update the hiscore if needed and update all the pending goals and events
+ * 
+ * @param user_id
+ * @param gamename
+ * @param date
+ * @param points
+ * @param miss
+ * @param duration
+ * @param winner
+ * @param level
+ * @param size
+ * @param score
+ * 
+ */
 
 if ($app -> request() -> isPost()) {
     $response_array = array();
@@ -53,7 +74,7 @@ if ($app -> request() -> isPost()) {
     //echo "querry is: ".$query;
     $result = $db -> query($query);
 
-    if ($result -> rowCount() > 0) {
+    if ($result -> rowCount() > 0) {// checks if there is another highscore of this game
         $row = $result -> fetch(PDO::FETCH_ASSOC);
         $highscore = $row['highscore'];
         if ($highscore < $score) {
@@ -91,7 +112,7 @@ if ($app -> request() -> isPost()) {
         
         //echo "game name is ".$gamename." and goal game name is ".$goal_gamename." and are they equal ? ".($gamename == $goal_gamename)."";
         
-        if ($goal_type == 2) {
+        if ($goal_type == 2) { //goal type 2 are the events
             //echo "i am here in goal type 2";
             $currently = $currently + $score;
             $query = "UPDATE goals SET currently=" . $currently . " WHERE achieved_by =" . $user_id . " AND goal_id =".$goal_id.";";
@@ -99,7 +120,7 @@ if ($app -> request() -> isPost()) {
             $result = $db -> query($query);
 
         } 
-        if ($gamename == $goal_gamename) {// event
+        if ($gamename == $goal_gamename) {
             // echo "i am here in game names equaliti";
             if ($goal_type == 0) {// gather score
                 $currently = $currently + $score;

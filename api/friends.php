@@ -9,6 +9,12 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+
+/**
+ * get request
+ * @param user_id
+ * @return the user information of the users friends 
+ */
 if ($app -> request() -> isGet()) {
 
     $user_id = $app -> request() -> get(Tags::$user_id);
@@ -48,6 +54,14 @@ if ($app -> request() -> isGet()) {
     }
 
 }
+
+/**
+ * post request
+ * @param op : operation either add a new friend or delete an existing one
+ * @param from_user : sender of the request
+ * @param to_user   : receiver of the request
+ */
+
 if ($app -> request() -> isPost()) {
     $op = $app -> request() -> post(Tags::$op);
     $from_user = $app -> request() -> post(Tags::$from_user);

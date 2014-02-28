@@ -9,6 +9,20 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+
+/**
+ *  @param op : user_events , event_info, event_topten
+ *  if op = user_events
+ *      @param user_id
+ *      @return the events that the user participating
+ * if op = event_info
+ *      @param event_id
+ *      @return the event information
+ * if op = event_topten
+ *      @param event_entity
+ *      @return the event's top ten players
+ */
+
 if ($app -> request() -> isGet()) {
     if ($app -> request() -> get(Tags::$op) == "user_events") {
         $user_id = $app -> request() -> get(Tags::$user_id);
@@ -30,6 +44,19 @@ if ($app -> request() -> isGet()) {
         echo json_encode($result -> fetchAll(PDO::FETCH_ASSOC));
     }
 }
+
+/**
+ * @param creator
+ * @param name : event name
+ * @param type_of_paricipants (0 : user, 1: groups)
+ * @param start_date
+ * @param end_date
+ * @param reward_text
+ * @param reward_points
+ * 
+ * @return the event's info
+ * 
+ */
 if ($app -> request() -> isPost()) {
 
     $creator = $app -> request() -> post('creator');

@@ -16,6 +16,12 @@
     		. "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 	$db = new PDO($dsn); 
 	
+    /**
+     * @param event_id
+     * @return the event's participants
+     * 
+     */
+    
 	if($app->request()->isGet()){
 		
 		$event	= $app->request()->get(Tags::$event_id );	
@@ -52,26 +58,37 @@
 		}
 			
 	}
+	
+	/**
+     * @param op : single (add a single group or user) , multiple (adds multiple gruops or users)
+     * if op = single 
+     *      @param participant : group or single
+     *      @param event_id
+     * if op = multiple
+     *      @param participants : list of the participants to be added
+     *      @param event_id
+     */
+	
 	if($app->request()->isPost()){
 	    
         $user_ids = array();
         
 		if($app->request()->post(Tags::$op) == "single"){
-			$participant  	= $app->request()->post('participant');
+			$participant  	= $app->request()->post('particqueryipant');
 			$user_ids[] = $participant;
 		    $event	= $app->request()->post(Tags::$event_id );	
 			$query = "SELECT * FROM events WHERE event_id =".$event." ;";
 			$result = $db->query($query);
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			//echo $row['type_of_participants'] ;
-			if($row['type_of_participants'] == 0){
+			if($row['type_of_participants'] == 0){ // participants are single users
 				$query = "INSERT INTO event_participants (event, participant, status) VALUES (".
 				" ".$event.", ".
 				" ".$participant.", 1 );";		
 				//echo $query ;
 				$result = $db->query($query);
 			}
-			else {
+			else { // participants are groups
 
 				$query = "SELECT * FROM group_members gm WHERE gm.group_id =".$participant." ;";
 				$result = $db->query($query);

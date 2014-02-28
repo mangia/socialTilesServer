@@ -9,6 +9,18 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname= d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+/**
+ * @param op : user_groups , group_info, all_groups
+ * if op  = user_groups
+ *      @param user_id
+ *      @return all the groups that the user is member of
+ * if op = group_info
+ *      @param group_indo 
+ *      @return the group's info
+ * if op all_grops
+ *      @return  info for all the groups
+ */
+
 if ($app -> request() -> isGet()) {
 
     if ($app -> request() -> get(Tags::$op) == "user_groups") {
@@ -57,6 +69,16 @@ if ($app -> request() -> isGet()) {
      }*/
 
 }
+
+/**
+ * @param name : group name
+ * @param date_created
+ * @param description
+ * @param creator
+ * 
+ * @return the group info
+ */
+
 if ($app -> request() -> isPost()) {
 
     $name = $app -> request() -> post('name');

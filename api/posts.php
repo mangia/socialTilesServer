@@ -9,7 +9,19 @@ $app = new \Slim\Slim();
 $dsn = "pgsql:" . "host=ec2-54-227-238-31.compute-1.amazonaws.com;" . "dbname=d3r468400g680j;" . "user=wzcdebwgjfehyz;" . "port=5432;" . "sslmode=require;" . "password=U2hPQsSC7_oM4bV-Fp7NiRy9j7 ";
 $db = new PDO($dsn);
 
+/**
+ * @param op :  group, event or user depending on which entity is requesting for post
+ * if op   =  group or event
+ *      @param entity : the event or the group that it made the requests
+ *      @return all the posts that were posted on the entity
+ * if op = user
+ *      @param user_id
+ *      @return all the posts that the user has posted and that his/her friends have posted
+ * 
+ */
+
 if ($app -> request() -> isGet()) {
+    
     if ($app -> request() -> get(Tags::$op) == Tags::$group) {
         $entity = $app -> request() -> get(Tags::$posted_to);
         $query = "SELECT * from posts p, users u WHERE p.posted_to =" . $entity . " AND p.creator = u.user_id ORDER BY post_date desc limit 40 ; ";

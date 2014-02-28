@@ -1,0 +1,6 @@
+composer.*
+*.dump
+connect_to_databse
+createdatabase_backup.sql
+pg_cred.txt
+libpeerconnection.log
